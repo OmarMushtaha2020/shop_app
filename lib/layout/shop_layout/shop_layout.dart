@@ -8,7 +8,6 @@ class ShopLayout extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocConsumer<ShopLayoutCubit,ShopeLayoutStates>(
       listener: (context, state) {
-
       },
        builder: (context, state) {
          return      Scaffold(
