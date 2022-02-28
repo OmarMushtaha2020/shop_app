@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:bloc/bloc.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -19,6 +21,7 @@ class ShopLayoutCubit extends Cubit<ShopeLayoutStates>{
   ShopLayoutCubit( ) : super(InitialState());
  static ShopLayoutCubit get(context)=>BlocProvider.of(context);
  int index=0;
+ Map<int,bool>favot={};
  List<Widget>Page=[
    ProductsPage(),
    CateogriesPage(),
@@ -39,7 +42,12 @@ class ShopLayoutCubit extends Cubit<ShopeLayoutStates>{
    emit(LOAD());
    DioHelper.get_data(method: 'home',toaken: takon).then((value) {
     home=ShopHomeModel.fromjson(value!.data);
-
+home!.data!.Products!.forEach((element) {
+ favot.addAll({
+element.id!:element.in_favorites!
+ }
+ );
+});
     emit(Succed());
   }).catchError((error){
     print(error);

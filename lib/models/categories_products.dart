@@ -23,6 +23,7 @@ class Product {
   dynamic?old_price;
   dynamic?discount;
   String? image;
+  String?description;
   String?name;
   bool?  in_favorites;
   bool?in_cart;
@@ -32,6 +33,8 @@ class Product {
     old_price=json['old_price'];
     discount=json['discount'];
     image=json['image'];
+    description=json['description'];
+
     name=json['name'];
     in_favorites=json['in_favorites'];
     in_cart=json['in_cart'];

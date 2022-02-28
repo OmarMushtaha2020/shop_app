@@ -6,6 +6,7 @@ import 'package:shop_app/layout/shop_layout/Shop_Layout_cubit/shop_layout_cubit.
 import 'package:shop_app/layout/shop_layout/Shop_Layout_cubit/shop_layout_states.dart';
 import 'package:shop_app/models/categories_model.dart';
 import 'package:shop_app/models/home_model.dart';
+import 'package:shop_app/modules/Product_details.dart';
 import 'package:shop_app/modules/product_cateogries/product_cateogries.dart';
 import 'package:shop_app/shared/components/components.dart';
 import 'package:shop_app/shared/components/constant.dart';
@@ -21,14 +22,17 @@ class ProductsPage extends StatelessWidget {
               ShopLayoutCubit.get(context).categories != null,
           builder: (context) => bulid_products(
               ShopLayoutCubit.get(context).home!,
-              ShopLayoutCubit.get(context).categories!),
+              ShopLayoutCubit.get(context).categories!,
+              context
+
+          ),
           fallback: (context) => Center(child: CircularProgressIndicator()),
         );
       },
     );
   }
 
-  Widget bulid_products(ShopHomeModel home, CategoriesModel categories) =>
+  Widget bulid_products(ShopHomeModel home, CategoriesModel categories,context) =>
       SingleChildScrollView(
         physics: BouncingScrollPhysics(),
         child: Column(
@@ -103,37 +107,42 @@ class ProductsPage extends StatelessWidget {
                   children: List.generate(
                       home.data!.Products!.length,
                       (index) =>
-                          bulid_grid_products(home.data!.Products![index]))),
+                          bulid_grid_products(home.data!.Products![index],context))),
             ),
           ],
         ),
       );
 
-  Widget bulid_grid_products(Broducts products) => Container(
+  Widget bulid_grid_products(Broducts products,context) => Container(
         color: Colors.white,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Padding(
               padding: const EdgeInsets.only(top: 5),
-              child: Stack(
-                alignment: Alignment.bottomLeft,
-                children: [
-                  Image(
-                    image: NetworkImage('${products.image}'),
-                    height: 190,
-                    width: double.infinity,
-                  ),
-                  if (products.discount != 0)
-                    Container(
-                      padding: EdgeInsets.symmetric(horizontal: 5),
-                      color: Colors.red,
-                      child: Text(
-                        "DISCOUNT",
-                        style: TextStyle(color: Colors.white, fontSize: 8),
-                      ),
+              child: GestureDetector(
+                onTap: () {
+                  Navigator.push(context, MaterialPageRoute(builder: (context) => Productdetails(products.image,products.description,products.name),));
+                },
+                child: Stack(
+                  alignment: Alignment.bottomLeft,
+                  children: [
+                    Image(
+                      image: NetworkImage('${products.image}'),
+                      height: 190,
+                      width: double.infinity,
                     ),
-                ],
+                    if (products.discount != 0)
+                      Container(
+                        padding: EdgeInsets.symmetric(horizontal: 5),
+                        color: Colors.red,
+                        child: Text(
+                          "DISCOUNT",
+                          style: TextStyle(color: Colors.white, fontSize: 8),
+                        ),
+                      ),
+                  ],
+                ),
               ),
             ),
             Padding(
@@ -169,11 +178,15 @@ class ProductsPage extends StatelessWidget {
                           ),
                         ),
                       Spacer(),
-                      IconButton(
-                        onPressed: () {},
-                        icon: Icon(Icons.favorite_border),
-                        padding: EdgeInsets.zero,
-                      )
+                       CircleAvatar(
+
+                         radius: 15.0,
+                         backgroundColor: ShopLayoutCubit.get(context).favot[products.id]!?Colors.blue:Colors.grey,
+                         child: IconButton(
+                            onPressed: () {},
+                            icon: Icon(Icons.favorite_border,color: Colors.white,size: 14.0,),
+                      ),
+                       )
                     ],
                   )
                 ],

@@ -26,7 +26,8 @@ await  CacthHelper.inti();
   HttpOverrides.global = new MyHttpOverrides();
 bool onBoard=    CacthHelper.get_Data(key: 'onBoard');
  takon=CacthHelper.get_Data(key:'takon' );
-Widget? startwidget;
+print(takon);
+ Widget? startwidget;
   if(onBoard!=null){
     if(takon!=null){
       startwidget=ShopLayout();

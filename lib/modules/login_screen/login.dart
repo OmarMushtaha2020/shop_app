@@ -3,7 +3,6 @@ import 'package:conditional_builder/conditional_builder.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:shop_app/layout/shop_layout/shop_layout.dart';
 import 'package:shop_app/modules/login_screen/login_cubit/login_cubit.dart';
 import 'package:shop_app/modules/login_screen/login_cubit/login_status.dart';
