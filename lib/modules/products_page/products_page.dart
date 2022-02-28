@@ -23,16 +23,15 @@ class ProductsPage extends StatelessWidget {
           builder: (context) => bulid_products(
               ShopLayoutCubit.get(context).home!,
               ShopLayoutCubit.get(context).categories!,
-              context
-
-          ),
+              context),
           fallback: (context) => Center(child: CircularProgressIndicator()),
         );
       },
     );
   }
 
-  Widget bulid_products(ShopHomeModel home, CategoriesModel categories,context) =>
+  Widget bulid_products(
+          ShopHomeModel home, CategoriesModel categories, context) =>
       SingleChildScrollView(
         physics: BouncingScrollPhysics(),
         child: Column(
@@ -78,8 +77,8 @@ class ProductsPage extends StatelessWidget {
                   child: ListView.separated(
                       physics: BouncingScrollPhysics(),
                       scrollDirection: Axis.horizontal,
-                      itemBuilder: (context, index) =>
-                          bulid_categories(categories.data!.data[index],context),
+                      itemBuilder: (context, index) => bulid_categories(
+                          categories.data!.data[index], context),
                       separatorBuilder: (context, index) => SizedBox(
                             width: 10,
                           ),
@@ -106,14 +105,14 @@ class ProductsPage extends StatelessWidget {
                   crossAxisCount: 2,
                   children: List.generate(
                       home.data!.Products!.length,
-                      (index) =>
-                          bulid_grid_products(home.data!.Products![index],context))),
+                      (index) => bulid_grid_products(
+                          home.data!.Products![index], context))),
             ),
           ],
         ),
       );
 
-  Widget bulid_grid_products(Broducts products,context) => Container(
+  Widget bulid_grid_products(Broducts products, context) => Container(
         color: Colors.white,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -122,7 +121,12 @@ class ProductsPage extends StatelessWidget {
               padding: const EdgeInsets.only(top: 5),
               child: GestureDetector(
                 onTap: () {
-                  Navigator.push(context, MaterialPageRoute(builder: (context) => Productdetails(products.image,products.description,products.name),));
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => Productdetails(products.image,
+                            products.description, products.name),
+                      ));
                 },
                 child: Stack(
                   alignment: Alignment.bottomLeft,
@@ -178,15 +182,21 @@ class ProductsPage extends StatelessWidget {
                           ),
                         ),
                       Spacer(),
-                       CircleAvatar(
-
-                         radius: 15.0,
-                         backgroundColor: ShopLayoutCubit.get(context).favot[products.id]!?Colors.blue:Colors.grey,
-                         child: IconButton(
-                            onPressed: () {},
-                            icon: Icon(Icons.favorite_border,color: Colors.white,size: 14.0,),
-                      ),
-                       )
+                      CircleAvatar(
+                        radius: 15.0,
+                        backgroundColor:
+                            ShopLayoutCubit.get(context).favot[products.id]!
+                                ? Colors.blue
+                                : Colors.grey,
+                        child: IconButton(
+                          onPressed: () {},
+                          icon: Icon(
+                            Icons.favorite_border,
+                            color: Colors.white,
+                            size: 14.0,
+                          ),
+                        ),
+                      )
                     ],
                   )
                 ],
@@ -196,66 +206,80 @@ class ProductsPage extends StatelessWidget {
         ),
       );
 
-  Widget bulid_categories(Data data,context) =>
-      Stack(
-            alignment: Alignment.bottomCenter,
-            children: [
-              GestureDetector(
-                onTap: () async{
-                  if(data.id==44){
-                    ShopLayoutCubit.get(context).change_id('44');
-                    print(id);
-                    await     ShopLayoutCubit.get(context).getdata();
-                 Navigator.push(context, MaterialPageRoute(builder: (context) => ProductCaterogries(),));
+  Widget bulid_categories(Data data, context) => Stack(
+        alignment: Alignment.bottomCenter,
+        children: [
+          GestureDetector(
+            onTap: () async {
+              if (data.id == 44) {
+                ShopLayoutCubit.get(context).change_id('44');
+                print(id);
+                await ShopLayoutCubit.get(context).getdata();
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => ProductCaterogries(),
+                    ));
+              } else if (data.id == 43) {
+                ShopLayoutCubit.get(context).change_id('43');
+                print(id);
+                await ShopLayoutCubit.get(context).getdata();
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => ProductCaterogries(),
+                    ));
+              } else if (data.id == 42) {
+                ShopLayoutCubit.get(context).change_id('42');
+                print(id);
+                await ShopLayoutCubit.get(context).getdata();
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => ProductCaterogries(),
+                    ));
+              } else if (data.id == 40) {
+                ShopLayoutCubit.get(context).change_id('40');
 
-                  }else if(data.id==43){
-                    ShopLayoutCubit.get(context).change_id('43');
-                    print(id);
-                    await ShopLayoutCubit.get(context).getdata();
-                   Navigator.push(context, MaterialPageRoute(builder: (context) => ProductCaterogries(),));
+                await ShopLayoutCubit.get(context).getdata();
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => ProductCaterogries(),
+                    ));
+              } else {
+                ShopLayoutCubit.get(context).change_id('46');
+                await ShopLayoutCubit.get(context).getdata();
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => ProductCaterogries(),
+                    ));
 
-                  }else if(data.id==42){
-                    ShopLayoutCubit.get(context).change_id('42');
-                    print(id);
-                    await  ShopLayoutCubit.get(context).getdata();
-               Navigator.push(context, MaterialPageRoute(builder: (context) => ProductCaterogries(),));
-
-                  }else if(data.id==40){
-                    ShopLayoutCubit.get(context).change_id('40');
-
-                    await ShopLayoutCubit.get(context).getdata();
-                   Navigator.push(context, MaterialPageRoute(builder: (context) => ProductCaterogries(),));
-
-                  }else{
-                    ShopLayoutCubit.get(context).change_id('46');
-                    await ShopLayoutCubit.get(context).getdata();
-                Navigator.push(context, MaterialPageRoute(builder: (context) => ProductCaterogries(),));
-
-                    print(id);
-
-                  }
-                },
-                child: Image(
-                  image: NetworkImage("${data.image}"),
-                  width: 100,
-                  height: 100,
-                  fit: BoxFit.cover,
-                ),
+                print(id);
+              }
+            },
+            child: Image(
+              image: NetworkImage("${data.image}"),
+              width: 100,
+              height: 100,
+              fit: BoxFit.cover,
+            ),
+          ),
+          Container(
+            width: 100,
+            color: Colors.black.withOpacity(.5),
+            child: Text(
+              "${data.name}",
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: 11,
               ),
-              Container(
-                width: 100,
-                color: Colors.black.withOpacity(.5),
-                child: Text(
-                  "${data.name}",
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 11,
-                  ),
-                  textAlign: TextAlign.center,
-                  maxLines: 1,
-                  overflow: TextOverflow.ellipsis,
-                ),
-              ),
-            ],
-          );
+              textAlign: TextAlign.center,
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
+            ),
+          ),
+        ],
+      );
 }

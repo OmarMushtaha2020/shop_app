@@ -31,16 +31,17 @@ Widget defaultFormField({
         ),
         suffixIcon: suffix != null
             ? IconButton(
-          onPressed: suffixPressed,
-          icon: Icon(
-            suffix,
-          ),
-        )
+                onPressed: suffixPressed,
+                icon: Icon(
+                  suffix,
+                ),
+              )
             : null,
         border: OutlineInputBorder(),
       ),
     );
-void showTest(String message,Status toast_status) {
+
+void showTest(String message, Status toast_status) {
   Fluttertoast.showToast(
       msg: message,
       toastLength: Toast.LENGTH_SHORT,
@@ -48,27 +49,27 @@ void showTest(String message,Status toast_status) {
       timeInSecForIosWeb: 5,
       backgroundColor: color_status(toast_status),
       textColor: Colors.white,
-      fontSize: 16.0
-  );
+      fontSize: 16.0);
 }
-enum Status{error,succeeded,warning}
 
-  Color color_status(Status toast_status){
+enum Status { error, succeeded, warning }
+
+Color color_status(Status toast_status) {
   Color color;
-  switch (toast_status){
+  switch (toast_status) {
     case Status.error:
-      color=Colors.red;
+      color = Colors.red;
       break;
     case Status.succeeded:
-      color=Colors.green;
+      color = Colors.green;
       break;
     case Status.warning:
-      color=Colors.orangeAccent;
+      color = Colors.orangeAccent;
       break;
   }
-return color;
+  return color;
 }
 
-Future<void>delay(int millies)async{
-  await Future.delayed(Duration(microseconds:millies));
+Future<void> delay(int millies) async {
+  await Future.delayed(Duration(microseconds: millies));
 }
