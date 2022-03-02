@@ -3,12 +3,19 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shop_app/layout/shop_layout/Shop_Layout_cubit/shop_layout_cubit.dart';
 import 'package:shop_app/layout/shop_layout/Shop_Layout_cubit/shop_layout_states.dart';
 import 'package:shop_app/modules/search_page/search_page.dart';
+import 'package:shop_app/shared/components/components.dart';
 
 class ShopLayout extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<ShopLayoutCubit, ShopeLayoutStates>(
-      listener: (context, state) {},
+      listener: (context, state) {
+        if(state is Successfully){
+        if(state.favorite!.status==false){
+          showTest(state.favorite!.message!, Status.error);
+        }
+        }
+      },
       builder: (context, state) {
         return Scaffold(
           appBar: AppBar(

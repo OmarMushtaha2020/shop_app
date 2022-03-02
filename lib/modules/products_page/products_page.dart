@@ -189,7 +189,9 @@ class ProductsPage extends StatelessWidget {
                                 ? Colors.blue
                                 : Colors.grey,
                         child: IconButton(
-                          onPressed: () {},
+                          onPressed: () {
+                            ShopLayoutCubit.get(context).changeFavorites(products.id!);
+                          },
                           icon: Icon(
                             Icons.favorite_border,
                             color: Colors.white,

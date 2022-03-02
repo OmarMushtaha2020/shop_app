@@ -113,7 +113,9 @@ class ProductCaterogries extends StatelessWidget {
                                 ? Colors.blue
                                 : Colors.grey,
                         child: IconButton(
-                          onPressed: () {},
+                          onPressed: () {
+                            ShopLayoutCubit.get(context).changeFavorites(products.id!);
+                          },
                           icon: Icon(
                             Icons.favorite_border,
                             size: 14.0,

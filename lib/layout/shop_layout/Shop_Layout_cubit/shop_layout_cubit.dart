@@ -6,6 +6,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shop_app/layout/shop_layout/Shop_Layout_cubit/shop_layout_states.dart';
 import 'package:shop_app/models/categories_model.dart';
 import 'package:shop_app/models/categories_products.dart';
+import 'package:shop_app/models/favorites_model.dart';
+import 'package:shop_app/models/get_favorites.dart';
 import 'package:shop_app/models/home_model.dart';
 import 'package:shop_app/modules/cateogries_page/cateogries_page.dart';
 import 'package:shop_app/modules/favorites_page/favorites_page.dart';
@@ -84,4 +86,35 @@ class ShopLayoutCubit extends Cubit<ShopeLayoutStates> {
       emit(Fail());
     });
   }
+  Favorites? favorite;
+void changeFavorites(int id){
+    favot[id] = !favot[id]!;
+    emit(changeFavor());
+    DioHelper.post_data(method: "favorites", data: {
+      'product_id':id,
+    },
+        toaken: takon
+    ).then((value)  {
+   favorite=   Favorites.fromjson(value!.data);
+   if(favorite!.status ==false){
+     favot[id] = !favot[id]!;
+   }else{
+     get_favorite();
+   }
+   emit(Successfully(favorite));
+    }).catchError((error){
+      favot[id] = !favot[id]!;
+      print(error);
+      emit(Error());
+
+    });
+}
+  GetFavirote? getFavirote;
+void get_favorite(){
+ emit(sceen());
+  DioHelper.get_data(method: 'favorites',toaken:takon, ).then((value) {
+    getFavirote= GetFavirote.fromJson(value!.data);
+  emit(Finishs());
+  });
+}
 }
