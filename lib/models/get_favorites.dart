@@ -1,30 +1,28 @@
 class GetFavirote {
   bool? status;
-  Data? data;
+  Datas? data;
 
 
   GetFavirote.fromJson(Map<String, dynamic> json) {
     status = json['status'];
-    data = json['data'] != null ?  Data.fromJson(json['data']) : null;
+    data = json['data'] != null ?  Datas.fromJson(json['data']) : null;
   }
 
 }
 
-class Data {
+class Datas {
   int? currentPage;
   List<FData>? data;
   String? firstPageUrl;
   int? from;
   int? lastPage;
   String? lastPageUrl;
-  Null? nextPageUrl;
   String? path;
   int? perPage;
-  Null? prevPageUrl;
   int? to;
   int? total;
 
-  Data.fromJson(Map<String, dynamic> json) {
+  Datas.fromJson(Map<String, dynamic> json) {
     currentPage = json['current_page'];
     if (json['data'] != null) {
       data = <FData>[];
@@ -36,11 +34,8 @@ class Data {
     from = json['from'];
     lastPage = json['last_page'];
     lastPageUrl = json['last_page_url'];
-    nextPageUrl = json['next_page_url'];
     path = json['path'];
     perPage = json['per_page'];
-    prevPageUrl = json['prev_page_url'];
-    to = json['to'];
     total = json['total'];
   }
 

@@ -11,7 +11,6 @@ import 'package:shop_app/models/get_favorites.dart';
 import 'package:shop_app/models/home_model.dart';
 import 'package:shop_app/modules/cateogries_page/cateogries_page.dart';
 import 'package:shop_app/modules/favorites_page/favorites_page.dart';
-import 'package:shop_app/modules/login_screen/login_cubit/login_status.dart';
 import 'package:shop_app/modules/products_page/products_page.dart';
 import 'package:shop_app/modules/settings_page/settings_page.dart';
 import 'package:shop_app/shared/components/constant.dart';
@@ -34,6 +33,9 @@ class ShopLayoutCubit extends Cubit<ShopeLayoutStates> {
     index = value;
     if (index == 1) {
       getdata();
+    }
+    if(index==2){
+    get_favorite();
     }
     emit(ChangeIndex());
   }
@@ -110,9 +112,11 @@ void changeFavorites(int id){
     });
 }
   GetFavirote? getFavirote;
-void get_favorite(){
- emit(sceen());
-  DioHelper.get_data(method: 'favorites',toaken:takon, ).then((value) {
+Future<void> get_favorite() async {
+  emit(sceen());
+
+  await DioHelper.get_data(method: 'favorites',toaken:takon, ).then((value) {
+
     getFavirote= GetFavirote.fromJson(value!.data);
   emit(Finishs());
   });

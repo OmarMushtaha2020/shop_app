@@ -1,3 +1,4 @@
+import 'package:conditional_builder/conditional_builder.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shop_app/layout/shop_layout/Shop_Layout_cubit/shop_layout_cubit.dart';
@@ -13,22 +14,26 @@ class CateogriesPage extends StatelessWidget {
     return BlocConsumer<ShopLayoutCubit, ShopeLayoutStates>(
       listener: (context, state) {},
       builder: (context, state) {
-        return Scaffold(
-            body: ListView.separated(
-                physics: BouncingScrollPhysics(),
-                itemBuilder: (context, index) => bulidCateogries(
-                    ShopLayoutCubit.get(context).categories!.data!.data[index],
-                    context),
-                separatorBuilder: (context, index) => Container(
-                      height: 1,
-                      width: double.infinity,
-                      color: Colors.grey[300],
-                    ),
-                itemCount: ShopLayoutCubit.get(context)
-                    .categories!
-                    .data!
-                    .data
-                    .length));
+        return ConditionalBuilder(
+          condition: ShopLayoutCubit.get(context).categories!=null,
+           builder:  (context) =>Scaffold(
+               body: ListView.separated(
+                   physics: BouncingScrollPhysics(),
+                   itemBuilder: (context, index) => bulidCateogries(
+                       ShopLayoutCubit.get(context).categories!.data!.data[index],
+                       context),
+                   separatorBuilder: (context, index) => Container(
+                     height: 1,
+                     width: double.infinity,
+                     color: Colors.grey[300],
+                   ),
+                   itemCount: ShopLayoutCubit.get(context)
+                       .categories!
+                       .data!
+                       .data
+                       .length)),
+           fallback: (context) => Center(child: CircularProgressIndicator()),
+        );
       },
     );
   }

@@ -18,8 +18,7 @@ class ProductsPage extends StatelessWidget {
       listener: (context, state) {},
       builder: (context, state) {
         return ConditionalBuilder(
-          condition: ShopLayoutCubit.get(context).home != null &&
-              ShopLayoutCubit.get(context).categories != null,
+          condition: ShopLayoutCubit.get(context).home != null ,
           builder: (context) => bulid_products(
               ShopLayoutCubit.get(context).home!,
               ShopLayoutCubit.get(context).categories!,
@@ -125,7 +124,7 @@ class ProductsPage extends StatelessWidget {
                       context,
                       MaterialPageRoute(
                         builder: (context) => Productdetails(products.image,
-                            products.description, products.name),
+                            products.description, products.name,products.id),
                       ));
                 },
                 child: Stack(

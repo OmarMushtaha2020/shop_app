@@ -65,7 +65,7 @@ class MyApp extends StatelessWidget {
             create: (context) => ShopLayoutCubit()
               ..getData()
               ..get_categories()
-              ..getdata()..get_favorite())
+              ..getdata())
       ],
       child: BlocConsumer<AppCubit, AppStatus>(
         listener: (context, state) {},

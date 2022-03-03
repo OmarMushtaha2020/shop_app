@@ -50,7 +50,7 @@ class ProductCaterogries extends StatelessWidget {
                       context,
                       MaterialPageRoute(
                           builder: (context) => Productdetails(products.image,
-                              products.description, products.name)));
+                              products.description, products.name,products.id)));
                 },
                 child: Stack(
                   alignment: Alignment.bottomLeft,
