@@ -42,7 +42,7 @@ class FavoritesPage extends StatelessWidget {
   Widget bulidFaviter(FData data, context) => Padding(
         padding: const EdgeInsets.all(20.0),
         child: Container(
-          height: 150,
+          height: 120,
           child: Row(
             children: [
               GestureDetector(
@@ -85,13 +85,16 @@ class FavoritesPage extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(
-                      '${data.product!.name}',
-                      style: TextStyle(
-                        fontSize: 14,
-                        height: 1.3,
+                    Padding(
+                      padding: const EdgeInsets.only(top: 20),
+                      child: Text(
+                        '${data.product!.name}',
+                        style: TextStyle(
+                          fontSize: 14,
+                          height: 1.3,
+                        ),
+                        maxLines: 1,
                       ),
-                      maxLines: 1,
                     ),
                     Spacer(),
                     Spacer(),

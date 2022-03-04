@@ -7,6 +7,7 @@ import 'package:shop_app/modules/login_screen/login_cubit/login_cubit.dart';
 import 'package:shop_app/modules/login_screen/login_cubit/login_status.dart';
 import 'package:shop_app/modules/register_screen/register_screen.dart';
 import 'package:shop_app/shared/components/components.dart';
+import 'package:shop_app/shared/components/constant.dart';
 import 'package:shop_app/shared/network/local/cacth_helper.dart';
 
 class Login extends StatefulWidget {
@@ -41,6 +42,7 @@ class _LoginState extends State<Login> {
                     context,
                     MaterialPageRoute(builder: (context) => ShopLayout()),
                     (route) => false);
+              takon=state.loginModels.data!.toaken!;
               }
             });
           } else {
@@ -136,8 +138,7 @@ class _LoginState extends State<Login> {
                           child: MaterialButton(
                             onPressed: () {
                               if (from.currentState!.validate()) {
-                                LoginCubit.get(context)
-                                    .login(password.text, email.text);
+                                LoginCubit.get(context).login(password.text, email.text);
                               }
                             },
                             child: Text(

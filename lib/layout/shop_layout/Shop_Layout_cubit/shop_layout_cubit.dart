@@ -9,6 +9,7 @@ import 'package:shop_app/models/categories_products.dart';
 import 'package:shop_app/models/favorites_model.dart';
 import 'package:shop_app/models/get_favorites.dart';
 import 'package:shop_app/models/home_model.dart';
+import 'package:shop_app/models/shop-login-models.dart';
 import 'package:shop_app/modules/cateogries_page/cateogries_page.dart';
 import 'package:shop_app/modules/favorites_page/favorites_page.dart';
 import 'package:shop_app/modules/products_page/products_page.dart';
@@ -120,5 +121,18 @@ Future<void> get_favorite() async {
     getFavirote= GetFavirote.fromJson(value!.data);
   emit(Finishs());
   });
+
+
+}
+  ShapeLoginModels? userData;
+void getDataproflie(){
+  DioHelper.get_data(method: 'profile',toaken: takon).then((value) {
+   userData=ShapeLoginModels.fromjson(value!.data);
+    emit(GetUserDataSuccessed());
+  }).catchError((error){
+   print(error.toString());
+    emit(GetUserDataFailed());
+  });
+
 }
 }

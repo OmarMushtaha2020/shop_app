@@ -29,3 +29,9 @@ class Successfully  extends ShopeLayoutStates {
   Favorites? favorite;
 Successfully(this.favorite);
 }
+class GetUserDataSuccessed extends ShopeLayoutStates{
+
+}
+class GetUserDataFailed extends ShopeLayoutStates{
+
+}
