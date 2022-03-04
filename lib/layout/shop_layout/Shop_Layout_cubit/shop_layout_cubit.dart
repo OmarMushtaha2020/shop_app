@@ -124,7 +124,6 @@ Future<void> get_favorite() async {
 
 
 }
-  ShapeLoginModels? userData;
 void getDataproflie(){
   DioHelper.get_data(method: 'profile',toaken: takon).then((value) {
    userData=ShapeLoginModels.fromjson(value!.data);

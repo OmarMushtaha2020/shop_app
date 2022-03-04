@@ -4,6 +4,8 @@ import 'package:shop_app/layout/shop_layout/Shop_Layout_cubit/shop_layout_cubit.
 import 'package:shop_app/layout/shop_layout/Shop_Layout_cubit/shop_layout_states.dart';
 import 'package:shop_app/modules/login_screen/login.dart';
 import 'package:shop_app/shared/components/components.dart';
+import 'package:shop_app/shared/components/constant.dart';
+import 'package:shop_app/shared/components/constant.dart';
 import 'package:shop_app/shared/network/local/cacth_helper.dart';
 
 class SettingsPage extends StatelessWidget {
@@ -18,9 +20,9 @@ class SettingsPage extends StatelessWidget {
 
       },
       builder: (context, state) {
-        email.text=ShopLayoutCubit.get(context).userData!.data!.email!;
-        name.text=ShopLayoutCubit.get(context).userData!.data!.name!;
-        phone.text=ShopLayoutCubit.get(context).userData!.data!.phone!;
+        email.text=userData!.data!.email!;
+        name.text=userData!.data!.name!;
+        phone.text=userData!.data!.phone!;
 
         return  Scaffold(
           appBar: AppBar(),

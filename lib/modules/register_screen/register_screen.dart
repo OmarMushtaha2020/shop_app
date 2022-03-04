@@ -30,7 +30,7 @@ class RegtsterScreen extends StatelessWidget {
             CacthHelper.saveData('takon', state.userData!.data!.toaken).then((value) {
               print(value);
               if (value != null) {
-                takon=state.userData.data!.toaken!;
+                takon=state.userData!.data!.toaken!;
 
                 Navigator.pushAndRemoveUntil(
                     context,
