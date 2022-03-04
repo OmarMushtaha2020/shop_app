@@ -2,6 +2,7 @@ import 'package:bloc/bloc.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:shop_app/models/register_model.dart';
 import 'package:shop_app/models/shop-login-models.dart';
 import 'package:shop_app/modules/login_screen/login_cubit/login_status.dart';
 import 'package:shop_app/shared/network/remote/dio_helper.dart';
@@ -36,5 +37,19 @@ class LoginCubit extends Cubit<LoginStatus> {
     suffix =
         isPassword ? Icons.visibility_outlined : Icons.visibility_off_outlined;
     emit(ShopChangePasswordVisibilityState());
+  }
+  ShapeLoginModels? userData;
+  void register(String name,String email,String password,String phone){
+    DioHelper.post_data(method: 'register', data: {
+      "name":'$name',
+      "email":'$email',
+      "password":'$password',
+      "phone":'$phone',
+    }).then((value) {
+  userData= ShapeLoginModels.fromjson(value!.data);
+      emit(Register(userData!));
+    }).catchError((errorr){
+      emit(RegisterFail(errorr.toString()));
+    });
   }
 }
