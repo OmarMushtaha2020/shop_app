@@ -134,4 +134,17 @@ void getDataproflie(){
   });
 
 }
+void updateData(String name,String email,String phone){
+DioHelper.put_data(toaken: takon,method: 'update-profile', data: {
+  "name":'$name',
+  "email":'$email',
+  "phone":'$phone',
+}).then((value) {
+  userData=ShapeLoginModels.fromjson(value!.data);
+emit(update(userData));
+
+}).catchError((error){
+  emit(Fail());
+});
+}
 }

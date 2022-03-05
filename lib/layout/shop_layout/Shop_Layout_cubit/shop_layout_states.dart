@@ -1,4 +1,5 @@
 import 'package:shop_app/models/favorites_model.dart';
+import 'package:shop_app/models/shop-login-models.dart';
 
 class ShopeLayoutStates {}
 
@@ -9,6 +10,7 @@ class ChangeIndex extends ShopeLayoutStates {}
 class Succed extends ShopeLayoutStates {}
 
 class fail extends ShopeLayoutStates {}
+class Succe extends ShopeLayoutStates {}
 
 class LOAD extends ShopeLayoutStates {}
 class sceen extends ShopeLayoutStates {}
@@ -17,6 +19,10 @@ class Finishs extends ShopeLayoutStates {}
 class Success extends ShopeLayoutStates {}
 
 class Fail extends ShopeLayoutStates {}
+class update extends ShopeLayoutStates {
+  ShapeLoginModels? loginModels;
+  update(this.loginModels);
+}
 
 class Successed extends ShopeLayoutStates {}
 

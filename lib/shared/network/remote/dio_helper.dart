@@ -16,7 +16,8 @@ class DioHelper {
       {required String method,
       required Map<String, dynamic>? data,
       String? lang = "en",
-      String? toaken}) async {
+      String? toaken}
+      ) async {
     dio!.options.headers = {
       "lang": "$lang",
       "Authorization": "${toaken ?? ''}",
@@ -37,5 +38,17 @@ class DioHelper {
       "Content-Type": "application/json",
     };
     return await dio?.get(method, queryParameters: data);
+  }
+  static Future<Response?> put_data(
+      {required String method,
+        required Map<String, dynamic>? data,
+        String? lang = "en",
+        String? toaken}) async {
+    dio!.options.headers = {
+      "lang": "$lang",
+      "Authorization": "${toaken ?? ''}",
+      "Content-Type": "application/json",
+    };
+    return await dio?.put(method, data: data);
   }
 }
