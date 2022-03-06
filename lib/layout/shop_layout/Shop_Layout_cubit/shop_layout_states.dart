@@ -30,7 +30,10 @@ class Failed extends ShopeLayoutStates {}
 
 class ChangeId extends ShopeLayoutStates {}
 class changeFavor extends ShopeLayoutStates {}
-class Error extends ShopeLayoutStates {}
+class Error extends ShopeLayoutStates {
+  String? errorr;
+  Error(this.errorr);
+}
 class Successfully  extends ShopeLayoutStates {
   Favorites? favorite;
 Successfully(this.favorite);
@@ -39,5 +42,12 @@ class GetUserDataSuccessed extends ShopeLayoutStates{
 
 }
 class GetUserDataFailed extends ShopeLayoutStates{
+
+}
+class SearchModelFail extends ShopeLayoutStates {
+String? erorr;
+SearchModelFail(this.erorr);
+}
+class SearchModelSuccessed extends ShopeLayoutStates{
 
 }

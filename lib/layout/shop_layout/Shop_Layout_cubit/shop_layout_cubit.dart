@@ -4,6 +4,7 @@ import 'package:bloc/bloc.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shop_app/layout/shop_layout/Shop_Layout_cubit/shop_layout_states.dart';
+import 'package:shop_app/models/SearchModel.dart';
 import 'package:shop_app/models/categories_model.dart';
 import 'package:shop_app/models/categories_products.dart';
 import 'package:shop_app/models/favorites_model.dart';
@@ -108,7 +109,7 @@ void changeFavorites(int id){
     }).catchError((error){
       favot[id] = !favot[id]!;
       print(error);
-      emit(Error());
+      emit(Error(error.toString()));
 
     });
 }
@@ -147,4 +148,19 @@ emit(update(userData));
   emit(Fail());
 });
 }
+  SearchModel? searchModel;
+Future<void>  search(String text ) async {
+  DioHelper.post_data(method: 'products/search', data: {
+    'text':'$text',
+  },toaken: takon).then((value){
+    searchModel=SearchModel.fromJson(value!.data);
+    emit(SearchModelSuccessed());
+  }).catchError((error){
+   print(error.toString());
+    emit(SearchModelFail(error.toString()));
+  });
 }
+}
+
+
+
