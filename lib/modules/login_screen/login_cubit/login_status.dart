@@ -7,13 +7,13 @@ class InitialStatues extends LoginStatus {}
 
 class Changes extends LoginStatus {}
 
-class Load extends LoginStatus {}
+class LoadLogin extends LoginStatus {}
 
 class Login extends LoginStatus {}
-class Register extends LoginStatus{
-  ShapeLoginModels? userData;
+class RegisterSucceeded extends LoginStatus{
+  ShopLoginModels? userData;
 
-  Register(this.userData);
+  RegisterSucceeded(this.userData);
 }
 class RegisterFail extends LoginStatus{
   String error;
@@ -21,7 +21,7 @@ class RegisterFail extends LoginStatus{
 }
 
 class LoginSucceeded extends LoginStatus {
-  ShapeLoginModels loginModels;
+  ShopLoginModels loginModels;
 
   LoginSucceeded(this.loginModels);
 }

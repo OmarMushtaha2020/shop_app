@@ -5,38 +5,36 @@ class ShopeLayoutStates {}
 
 class InitialState extends ShopeLayoutStates {}
 
-class ChangeIndex extends ShopeLayoutStates {}
+class ChangeButtonsIndex extends ShopeLayoutStates {}
 
-class Succed extends ShopeLayoutStates {}
-
-class fail extends ShopeLayoutStates {}
+class GetHomeDataSuccessed extends ShopeLayoutStates {}
+class LoadGetHomeData extends ShopeLayoutStates{}
+class GetHomeDataFailed extends ShopeLayoutStates {}
 class Succe extends ShopeLayoutStates {}
+class LoadGetCategory extends ShopeLayoutStates {}
+class GetFaviroteSuccessed extends ShopeLayoutStates {}
 
-class LOAD extends ShopeLayoutStates {}
-class sceen extends ShopeLayoutStates {}
-class Finishs extends ShopeLayoutStates {}
+class GetCategorysSuccessed extends ShopeLayoutStates {}
 
-class Success extends ShopeLayoutStates {}
-
-class Fail extends ShopeLayoutStates {}
-class update extends ShopeLayoutStates {
-  ShapeLoginModels? loginModels;
-  update(this.loginModels);
+class GetCategorysFailed extends ShopeLayoutStates {}
+class UpdateDataSuccessed extends ShopeLayoutStates {
+  ShopLoginModels? loginModels;
+  UpdateDataSuccessed(this.loginModels);
 }
+class UpdateDataFailed extends ShopeLayoutStates{}
+class GetCategorysProductSuccessed extends ShopeLayoutStates {}
 
-class Successed extends ShopeLayoutStates {}
+class GetCategorysProductFailed extends ShopeLayoutStates {}
 
-class Failed extends ShopeLayoutStates {}
-
-class ChangeId extends ShopeLayoutStates {}
-class changeFavor extends ShopeLayoutStates {}
-class Error extends ShopeLayoutStates {
+class ChangeCategorysId extends ShopeLayoutStates {}
+class ChangeFavorites extends ShopeLayoutStates {}
+class ChangeFavoritesFailed extends ShopeLayoutStates {
   String? errorr;
-  Error(this.errorr);
+  ChangeFavoritesFailed(this.errorr);
 }
-class Successfully  extends ShopeLayoutStates {
+class  ChangeFavoritesSuccessed extends ShopeLayoutStates {
   Favorites? favorite;
-Successfully(this.favorite);
+ChangeFavoritesSuccessed (this.favorite);
 }
 class GetUserDataSuccessed extends ShopeLayoutStates{
 
@@ -49,5 +47,11 @@ String? erorr;
 SearchModelFail(this.erorr);
 }
 class SearchModelSuccessed extends ShopeLayoutStates{
+
+}
+class GetFaviroteFailed extends ShopeLayoutStates{
+
+}
+class GetFavoritesLoad extends ShopeLayoutStates{
 
 }

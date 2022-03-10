@@ -10,7 +10,7 @@ class AppCubit extends Cubit<AppStatus> {
 
   void change_mode() {
     isDark = !isDark;
-    emit(Mode());
+    emit(ChangeMode());
   }
 
   bool is_bored = false;

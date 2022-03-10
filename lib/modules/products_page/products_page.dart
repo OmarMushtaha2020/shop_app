@@ -184,12 +184,12 @@ class ProductsPage extends StatelessWidget {
                       CircleAvatar(
                         radius: 15.0,
                         backgroundColor:
-                            ShopLayoutCubit.get(context).favot[products.id]!
+                            ShopLayoutCubit.get(context).Favorite[products.id]!
                                 ? Colors.blue
                                 : Colors.grey,
                         child: IconButton(
                           onPressed: () {
-                            ShopLayoutCubit.get(context).changeFavorites(products.id!);
+                            ShopLayoutCubit.get(context).change_favorites(products.id!);
                           },
                           icon: Icon(
                             Icons.favorite_border,
@@ -213,44 +213,44 @@ class ProductsPage extends StatelessWidget {
           GestureDetector(
             onTap: () async {
               if (data.id == 44) {
-                ShopLayoutCubit.get(context).change_id('44');
+                ShopLayoutCubit.get(context).change_categorys_id('44');
                 print(id);
-                await ShopLayoutCubit.get(context).getdata();
+                await ShopLayoutCubit.get(context).get_category_product();
                 Navigator.push(
                     context,
                     MaterialPageRoute(
                       builder: (context) => ProductCaterogries(),
                     ));
               } else if (data.id == 43) {
-                ShopLayoutCubit.get(context).change_id('43');
+                ShopLayoutCubit.get(context).change_categorys_id('43');
                 print(id);
-                await ShopLayoutCubit.get(context).getdata();
+                await ShopLayoutCubit.get(context).get_category_product();
                 Navigator.push(
                     context,
                     MaterialPageRoute(
                       builder: (context) => ProductCaterogries(),
                     ));
               } else if (data.id == 42) {
-                ShopLayoutCubit.get(context).change_id('42');
+                ShopLayoutCubit.get(context).change_categorys_id('42');
                 print(id);
-                await ShopLayoutCubit.get(context).getdata();
+                await ShopLayoutCubit.get(context).get_category_product();
                 Navigator.push(
                     context,
                     MaterialPageRoute(
                       builder: (context) => ProductCaterogries(),
                     ));
               } else if (data.id == 40) {
-                ShopLayoutCubit.get(context).change_id('40');
+                ShopLayoutCubit.get(context).change_categorys_id('40');
 
-                await ShopLayoutCubit.get(context).getdata();
+                await ShopLayoutCubit.get(context).get_category_product();
                 Navigator.push(
                     context,
                     MaterialPageRoute(
                       builder: (context) => ProductCaterogries(),
                     ));
               } else {
-                ShopLayoutCubit.get(context).change_id('46');
-                await ShopLayoutCubit.get(context).getdata();
+                ShopLayoutCubit.get(context).change_categorys_id('46');
+                await ShopLayoutCubit.get(context).get_category_product();
                 Navigator.push(
                     context,
                     MaterialPageRoute(

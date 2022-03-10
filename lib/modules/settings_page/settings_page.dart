@@ -89,7 +89,7 @@ class SettingsPage extends StatelessWidget {
                       color: Colors.blue,
 
                       onPressed: () {
-               ShopLayoutCubit.get(context).updateData(name.text, email.text, phone.text);
+               ShopLayoutCubit.get(context).update_data(name.text, email.text, phone.text);
                       },
                       child: Text(
                         "UPdate",

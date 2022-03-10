@@ -54,7 +54,7 @@ ShopLayoutCubit.get(context).search(value);
       },
     );
   }
-Widget get_search_product(Product product,context) => Padding(
+Widget get_search_product( Product product,context) => Padding(
   padding: const EdgeInsets.all(20.0),
   child: Container(
     height: 120,
@@ -136,12 +136,12 @@ Widget get_search_product(Product product,context) => Padding(
                   CircleAvatar(
                     radius: 15.0,
                     backgroundColor: ShopLayoutCubit.get(context)
-                        .favot[product.id]!
+                        .Favorite[product.id]!
                         ? Colors.blue
                         : Colors.grey,
                     child: IconButton(
                       onPressed: () {
-                        // ShopLayoutCubit.get(context).changeFavorites(product.id!);
+                        ShopLayoutCubit.get(context).change_favorites(product.id!);
                       },
                       icon: Icon(
                         Icons.favorite_border,

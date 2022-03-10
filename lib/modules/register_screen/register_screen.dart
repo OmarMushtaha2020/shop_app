@@ -21,7 +21,7 @@ class RegtsterScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocConsumer<LoginCubit,LoginStatus>(
       listener: (context, state) {
-        if (state is Register) {
+        if (state is RegisterSucceeded) {
           if (state.userData!.status == true) {
             print(state.userData!.message);
             print("eedw${state.userData!.data!.toaken}");

@@ -13,18 +13,18 @@ class LoginCubit extends Cubit<LoginStatus> {
   static LoginCubit get(context) => BlocProvider.of(context);
 
   void login(String password, email) {
-    emit(Load());
+    emit(LoadLogin());
     DioHelper.post_data(data: {
       'email': '$email',
       'password': '$password',
     }, method: 'login')
         .then((value) {
       // print(value);
-      userData = ShapeLoginModels.fromjson(value!.data);
+      userData = ShopLoginModels.fromjson(value!.data);
       emit(LoginSucceeded(userData!));
-    }).catchError((error) {
-      print(error.toString());
-      emit(LoginFail(error.toString()));
+    }).catchError((Error) {
+      print(Error.toString());
+      emit(LoginFail(Error.toString()));
     });
   }
 
@@ -44,10 +44,10 @@ class LoginCubit extends Cubit<LoginStatus> {
       "password":'$password',
       "phone":'$phone',
     }).then((value) {
-      userData= ShapeLoginModels.fromjson(value!.data);
-      emit(Register(userData!));
-    }).catchError((errorr){
-      emit(RegisterFail(errorr.toString()));
+      userData= ShopLoginModels.fromjson(value!.data);
+      emit(RegisterSucceeded(userData!));
+    }).catchError((Error){
+      emit(RegisterFail(Error.toString()));
     });
   }
 }

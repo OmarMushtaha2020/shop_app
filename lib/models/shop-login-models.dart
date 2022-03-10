@@ -1,10 +1,10 @@
-class ShapeLoginModels {
+class ShopLoginModels {
   bool? status;
   late String message;
 
   UserData? data;
 
-  ShapeLoginModels.fromjson(Map<String, dynamic> json) {
+  ShopLoginModels.fromjson(Map<String, dynamic> json) {
     status = json['status'];
     message = json['message'];
     data = json['data'] != null ? UserData.fromjson(json['data']) : null;

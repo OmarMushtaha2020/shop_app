@@ -10,7 +10,7 @@ class ShopLayout extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocConsumer<ShopLayoutCubit, ShopeLayoutStates>(
       listener: (context, state) {
-        if(state is Successfully){
+        if(state is ChangeFavoritesSuccessed){
         if(state.favorite!.status==false){
           showTest(state.favorite!.message!, Status.error);
         }
@@ -33,11 +33,11 @@ class ShopLayout extends StatelessWidget {
             ],
           ),
           body: ShopLayoutCubit.get(context)
-              .Page[ShopLayoutCubit.get(context).index],
+              .Screen[ShopLayoutCubit.get(context).index],
           bottomNavigationBar: BottomNavigationBar(
             currentIndex: ShopLayoutCubit.get(context).index,
             onTap: (value) {
-              ShopLayoutCubit.get(context).change_index(value);
+              ShopLayoutCubit.get(context).change_buttons_index(value);
             },
             items: [
               BottomNavigationBarItem(icon: Icon(Icons.home), label: "Home"),

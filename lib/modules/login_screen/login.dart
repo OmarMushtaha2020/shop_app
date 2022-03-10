@@ -131,7 +131,7 @@ class _LoginState extends State<Login> {
                         height: 30,
                       ),
                       ConditionalBuilder(
-                        condition: state is! Load,
+                        condition: state is! LoadLogin,
                         builder: (context) => Container(
                           color: Colors.blue,
                           width: double.infinity,

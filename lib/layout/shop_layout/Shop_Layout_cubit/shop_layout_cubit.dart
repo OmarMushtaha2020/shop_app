@@ -23,77 +23,78 @@ class ShopLayoutCubit extends Cubit<ShopeLayoutStates> {
 
   static ShopLayoutCubit get(context) => BlocProvider.of(context);
   int index = 0;
-  Map<int, bool> favot = {};
-  List<Widget> Page = [
+  Map<int, bool> Favorite = {};
+  List<Widget> Screen = [
     ProductsPage(),
     CateogriesPage(),
     FavoritesPage(),
     SettingsPage(),
   ];
 
-  void change_index(int value) {
+  void change_buttons_index(int value) {
     index = value;
     if (index == 1) {
-      getdata();
+      get_categories();
     }
     if(index==2){
     get_favorite();
     }
-    emit(ChangeIndex());
+    emit(ChangeButtonsIndex());
   }
 
   ShopHomeModel? home;
   CategoriesModel? categories;
 
-  void getData() {
-    emit(LOAD());
+  void get_home_data() {
+    emit(LoadGetHomeData());
     DioHelper.get_data(method: 'home', toaken: takon).then((value) {
       home = ShopHomeModel.fromjson(value!.data);
       home!.data!.Products!.forEach((element) {
-        favot.addAll({element.id!: element.in_favorites!});
+        Favorite.addAll({element.id!: element.in_favorites!});
+
       });
-      emit(Succed());
-    }).catchError((error) {
-      print(error);
-      emit(fail());
+      emit(GetHomeDataSuccessed());
+    }).catchError((Error) {
+      print(Error);
+      emit(GetHomeDataFailed());
     });
   }
 
   CategoryProducts? categoryProducts;
 
-  void change_id(String value) {
+  void change_categorys_id(String value) {
     id = value;
-    emit(ChangeId());
+    emit(ChangeCategorysId());
   }
 
-  Future<void> getdata() async {
-    emit(LOAD());
+  Future<void> get_category_product() async {
+    emit(LoadGetCategory());
     await DioHelper.get_data(toaken: takon, method: 'products', data: {
       'category_id': id,
     }).then((value) {
       categoryProducts = CategoryProducts.fromjson(value!.data);
       // print(categoryProducts!.element!.item![0].name);
-      emit(Successed());
-    }).catchError((error) {
-      print(error);
-      emit(Failed());
+      emit(GetCategorysProductSuccessed());
+    }).catchError((Error) {
+      print(Error);
+      emit(GetCategorysProductFailed());
     });
   }
 
   void get_categories() {
-    emit(LOAD());
+    emit(LoadGetCategory());
     DioHelper.get_data(method: 'categories', toaken: takon).then((value) {
       categories = CategoriesModel.fromjson(value!.data);
-      emit(Success());
+      emit(GetCategorysSuccessed());
     }).catchError((error) {
       print(error);
-      emit(Fail());
+      emit(GetCategorysFailed());
     });
   }
   Favorites? favorite;
-void changeFavorites(int id){
-    favot[id] = !favot[id]!;
-    emit(changeFavor());
+void change_favorites(int id){
+  Favorite[id] = !Favorite[id]!;
+    emit(ChangeFavorites());
     DioHelper.post_data(method: "favorites", data: {
       'product_id':id,
     },
@@ -101,33 +102,33 @@ void changeFavorites(int id){
     ).then((value)  {
    favorite=   Favorites.fromjson(value!.data);
    if(favorite!.status ==false){
-     favot[id] = !favot[id]!;
-   }else{
+     Favorite[id] = !Favorite[id]!;
+   }else {
      get_favorite();
    }
-   emit(Successfully(favorite));
-    }).catchError((error){
-      favot[id] = !favot[id]!;
-      print(error);
-      emit(Error(error.toString()));
+   emit(ChangeFavoritesSuccessed(favorite));
+    }).catchError((Error){
+      Favorite[id] = !Favorite[id]!;
+      print(Error);
+      emit(ChangeFavoritesFailed(Error.toString()));
 
     });
 }
-  GetFavirote? getFavirote;
-Future<void> get_favorite() async {
-  emit(sceen());
-
+  FavoritesModel? getFavirote;
+Future<void> get_favorite()  async{
+  emit(GetFavoritesLoad());
   await DioHelper.get_data(method: 'favorites',toaken:takon, ).then((value) {
-
-    getFavirote= GetFavirote.fromJson(value!.data);
-  emit(Finishs());
-  });
+    getFavirote= FavoritesModel.fromJson(value!.data);
+  emit(GetFaviroteSuccessed());
+  }).catchError((Error){
+    emit(GetFaviroteFailed());
+   });
 
 
 }
-void getDataproflie(){
+void get_data_proflie(){
   DioHelper.get_data(method: 'profile',toaken: takon).then((value) {
-   userData=ShapeLoginModels.fromjson(value!.data);
+   userData=ShopLoginModels.fromjson(value!.data);
     emit(GetUserDataSuccessed());
   }).catchError((error){
    print(error.toString());
@@ -135,17 +136,17 @@ void getDataproflie(){
   });
 
 }
-void updateData(String name,String email,String phone){
+void update_data(String name,String email,String phone){
 DioHelper.put_data(toaken: takon,method: 'update-profile', data: {
   "name":'$name',
   "email":'$email',
   "phone":'$phone',
 }).then((value) {
-  userData=ShapeLoginModels.fromjson(value!.data);
-emit(update(userData));
+  userData=ShopLoginModels.fromjson(value!.data);
+emit(UpdateDataSuccessed(userData));
 
-}).catchError((error){
-  emit(Fail());
+}).catchError((Error){
+  emit(UpdateDataFailed());
 });
 }
   SearchModel? searchModel;
@@ -155,9 +156,9 @@ Future<void>  search(String text ) async {
   },toaken: takon).then((value){
     searchModel=SearchModel.fromJson(value!.data);
     emit(SearchModelSuccessed());
-  }).catchError((error){
-   print(error.toString());
-    emit(SearchModelFail(error.toString()));
+  }).catchError((Error){
+   print(Error.toString());
+    emit(SearchModelFail(Error.toString()));
   });
 }
 }

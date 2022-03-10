@@ -33,11 +33,11 @@ class ProductCaterogries extends StatelessWidget {
             crossAxisCount: 2,
             children: List.generate(
                 categoryProducts.element!.item!.length,
-                (index) => bulid_grid(
+                (index) => bulid_grid_products(
                     categoryProducts.element!.item![index], context))),
       );
 
-  Widget bulid_grid(Product products, context) => Container(
+  Widget bulid_grid_products(Product products, context) => Container(
         color: Colors.white,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -109,12 +109,12 @@ class ProductCaterogries extends StatelessWidget {
                       CircleAvatar(
                         radius: 15.0,
                         backgroundColor:
-                            ShopLayoutCubit.get(context).favot[products.id]!
+                            ShopLayoutCubit.get(context).Favorite[products.id]!
                                 ? Colors.blue
                                 : Colors.grey,
                         child: IconButton(
                           onPressed: () {
-                            ShopLayoutCubit.get(context).changeFavorites(products.id!);
+                            ShopLayoutCubit.get(context).change_favorites(products.id!);
                           },
                           icon: Icon(
                             Icons.favorite_border,

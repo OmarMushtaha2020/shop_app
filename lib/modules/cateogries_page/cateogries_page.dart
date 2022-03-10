@@ -19,7 +19,7 @@ class CateogriesPage extends StatelessWidget {
            builder:  (context) =>Scaffold(
                body: ListView.separated(
                    physics: BouncingScrollPhysics(),
-                   itemBuilder: (context, index) => bulidCateogries(
+                   itemBuilder: (context, index) => bulid_faviters(
                        ShopLayoutCubit.get(context).categories!.data!.data[index],
                        context),
                    separatorBuilder: (context, index) => Container(
@@ -38,7 +38,7 @@ class CateogriesPage extends StatelessWidget {
     );
   }
 
-  Widget bulidCateogries(Data data, context) => GestureDetector(
+  Widget bulid_faviters(Data data, context) => GestureDetector(
         onTap: () async {},
         child: Padding(
           padding: const EdgeInsets.all(20.0),
@@ -65,9 +65,9 @@ class CateogriesPage extends StatelessWidget {
                 icon: Icon(Icons.arrow_forward_ios),
                 onPressed: () async {
                   if (data.id == 44) {
-                    ShopLayoutCubit.get(context).change_id('44');
+                    ShopLayoutCubit.get(context).change_categorys_id('44');
                     print(id);
-                    ShopLayoutCubit.get(context).getdata();
+                    ShopLayoutCubit.get(context).get_category_product();
                     await delay(20000);
                     await Navigator.push(
                         context,
@@ -75,9 +75,9 @@ class CateogriesPage extends StatelessWidget {
                           builder: (context) => ProductCaterogries(),
                         ));
                   } else if (data.id == 43) {
-                    ShopLayoutCubit.get(context).change_id('43');
+                    ShopLayoutCubit.get(context).change_categorys_id('43');
                     print(id);
-                    ShopLayoutCubit.get(context).getdata();
+                    ShopLayoutCubit.get(context).get_category_product();
                     await delay(20000);
 
                     await Navigator.push(
@@ -86,9 +86,9 @@ class CateogriesPage extends StatelessWidget {
                           builder: (context) => ProductCaterogries(),
                         ));
                   } else if (data.id == 42) {
-                    ShopLayoutCubit.get(context).change_id('42');
+                    ShopLayoutCubit.get(context).change_categorys_id('42');
                     print(id);
-                    ShopLayoutCubit.get(context).getdata();
+                    ShopLayoutCubit.get(context).get_category_product();
                     await delay(20000);
 
                     await Navigator.push(
@@ -97,9 +97,9 @@ class CateogriesPage extends StatelessWidget {
                           builder: (context) => ProductCaterogries(),
                         ));
                   } else if (data.id == 40) {
-                    ShopLayoutCubit.get(context).change_id('40');
+                    ShopLayoutCubit.get(context).change_categorys_id('40');
                     print(id);
-                    ShopLayoutCubit.get(context).getdata();
+                    ShopLayoutCubit.get(context).get_category_product();
                     await delay(20000);
 
                     await Navigator.push(
@@ -108,8 +108,8 @@ class CateogriesPage extends StatelessWidget {
                           builder: (context) => ProductCaterogries(),
                         ));
                   } else {
-                    ShopLayoutCubit.get(context).change_id('46');
-                    ShopLayoutCubit.get(context).getdata();
+                    ShopLayoutCubit.get(context).change_categorys_id('46');
+                    ShopLayoutCubit.get(context).get_category_product();
                     await delay(20000);
 
                     await Navigator.push(

@@ -65,12 +65,12 @@ Spacer(),
                                  CircleAvatar(
                                    radius: 15.0,
                                    backgroundColor:
-                                   ShopLayoutCubit.get(context).favot[id]!
+                                   ShopLayoutCubit.get(context).Favorite[id]!
                                        ? Colors.blue
                                        : Colors.grey,
                                    child: IconButton(
                                      onPressed: () {
-                                       ShopLayoutCubit.get(context).changeFavorites(id!);
+                                       ShopLayoutCubit.get(context).change_favorites(id!);
                                      },
                                      icon: Icon(
                                        Icons.favorite_border,
