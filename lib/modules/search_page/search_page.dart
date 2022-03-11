@@ -17,6 +17,7 @@ var text=TextEditingController();
     return  Scaffold(
           appBar: AppBar(),
           body: Column(
+
             children: [
               Padding(
                 padding: const EdgeInsets.all(20.0),
@@ -46,7 +47,14 @@ ShopLayoutCubit.get(context).search(value);
                   color: Colors.grey[100],
                 ), itemCount: ShopLayoutCubit.get(context).searchModel!.data!.pc!.length
                 ),
-              )
+              ),
+
+              if(ShopLayoutCubit.get(context).searchModel==null)
+                Padding(
+                  padding: const EdgeInsets.only(top: 300),
+                  child: Text("Please enter the item"),
+                ),
+
             ],
           ),
         );
@@ -54,7 +62,7 @@ ShopLayoutCubit.get(context).search(value);
       },
     );
   }
-Widget get_search_product( Product product,context) => Padding(
+Widget get_search_product( Products product,context) => Padding(
   padding: const EdgeInsets.all(20.0),
   child: Container(
     height: 120,
