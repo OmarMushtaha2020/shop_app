@@ -13,7 +13,7 @@ class FavoritesPage extends StatelessWidget {
       listener: (context, state) {},
       builder: (context, state) {
         return ConditionalBuilder(
-          condition: state  is! GetFavoritesLoad,
+          condition: ShopLayoutCubit.get(context).getFavirote!=null,
           builder:  (context) =>  Scaffold(
               body: Column(
                 children: [
