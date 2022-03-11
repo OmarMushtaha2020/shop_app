@@ -34,6 +34,11 @@ class FavoritesPage extends StatelessWidget {
                         itemCount: ShopLayoutCubit.get(context)
                             .getFavirote?.data?.data?.length??0),
                   ),
+            if(ShopLayoutCubit.get(context).getFavirote!.data!.data!.length==0)
+              Padding(
+                padding: const EdgeInsets.only(bottom: 300),
+                child: Center(child: Text('You don\'t have item')),
+              ),
                 ],
               )
 
@@ -127,7 +132,7 @@ fallback:(context) =>  Center(child: CircularProgressIndicator()),
                         CircleAvatar(
                           radius: 15.0,
                           backgroundColor:
-                          ShopLayoutCubit.get(context).Favorite[product.id]! ? Colors.blue : Colors.grey,
+                          ShopLayoutCubit.get(context).Favorite[product.id]?? true ? Colors.blue : Colors.grey,
                           child: IconButton(
                             onPressed: () {
                               ShopLayoutCubit.get(context)

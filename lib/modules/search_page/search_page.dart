@@ -136,7 +136,8 @@ Widget get_search_product( Product product,context) => Padding(
                   CircleAvatar(
                     radius: 15.0,
                     backgroundColor: ShopLayoutCubit.get(context)
-                        .Favorite[product.id]!
+                        .Favorite[product.id]
+                    ??true
                         ? Colors.blue
                         : Colors.grey,
                     child: IconButton(
