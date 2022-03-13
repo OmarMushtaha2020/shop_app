@@ -1,3 +1,4 @@
+import 'package:conditional_builder/conditional_builder.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shop_app/layout/shop_layout/Shop_Layout_cubit/shop_layout_cubit.dart';
@@ -25,112 +26,116 @@ class SettingsPage extends StatelessWidget {
       builder: (context, state) {
 
 
-        return Scaffold(
-          appBar: AppBar(),
-          body: Padding(
-            padding: const EdgeInsets.all(20.0),
-            child: SingleChildScrollView(
-              child: Column(
-                children: [
-                  SizedBox(
-                    height: 20,
-                  ),
-                  defaultFormField(
-                    label: "Name",
-                    controller: name,
-                    keyboardType: TextInputType.name,
-                    prefix: Icons.person,
-                    validate: (value) {
-                      if (value!.isEmpty) {
-                        return "Name must not be empty";
-                      }
-                      return null;
-                    },
-                    onChange: (value) {
-                      print(value);
-                    },
-                  ),
-                  SizedBox(
-                    height: 15,
-                  ),
-                  defaultFormField(
-                    label: "Email Address",
-                    controller: email,
-                    keyboardType: TextInputType.emailAddress,
-                    prefix: Icons.email,
-                    validate: (value) {
-                      if (value!.isEmpty) {
-                        return "email must not be empty";
-                      }
-                      return null;
-                    },
-                    onChange: (value) {
-                      print(value);
-                    },
-                  ),
-                  SizedBox(
-                    height: 15,
-                  ),
-                  defaultFormField(
-                    label: "Phone",
-                    controller: phone,
-                    keyboardType: TextInputType.phone,
-                    prefix: Icons.phone,
-                    validate: (value) {
-                      if (value!.isEmpty) {
-                        return "phone must not be empty";
-                      }
-                      return null;
-                    },
-                    onChange: (value) {
-                      print(value);
-                    },
-                  ),
-                  SizedBox(
-                    height: 30,
-                  ),
-                  Container(
-                    height: 50,
-                    width: double.infinity,
-                    child: MaterialButton(
-                      color: Colors.blue,
-                      onPressed: () {
-                        ShopLayoutCubit.get(context)
-                            .update_data(name.text, email.text, phone.text);
+        return ConditionalBuilder(
+          condition:ShopLayoutCubit.get(context).userModel!=null ,
+          builder: (context) => Scaffold(
+            appBar: AppBar(),
+            body: Padding(
+              padding: const EdgeInsets.all(20.0),
+              child: SingleChildScrollView(
+                child: Column(
+                  children: [
+                    SizedBox(
+                      height: 20,
+                    ),
+                    defaultFormField(
+                      label: "Name",
+                      controller: name,
+                      keyboardType: TextInputType.name,
+                      prefix: Icons.person,
+                      validate: (value) {
+                        if (value!.isEmpty) {
+                          return "Name must not be empty";
+                        }
+                        return null;
                       },
-                      child: Text(
-                        "UPdate",
-                        style: TextStyle(color: Colors.white),
+                      onChange: (value) {
+                        print(value);
+                      },
+                    ),
+                    SizedBox(
+                      height: 15,
+                    ),
+                    defaultFormField(
+                      label: "Email Address",
+                      controller: email,
+                      keyboardType: TextInputType.emailAddress,
+                      prefix: Icons.email,
+                      validate: (value) {
+                        if (value!.isEmpty) {
+                          return "email must not be empty";
+                        }
+                        return null;
+                      },
+                      onChange: (value) {
+                        print(value);
+                      },
+                    ),
+                    SizedBox(
+                      height: 15,
+                    ),
+                    defaultFormField(
+                      label: "Phone",
+                      controller: phone,
+                      keyboardType: TextInputType.phone,
+                      prefix: Icons.phone,
+                      validate: (value) {
+                        if (value!.isEmpty) {
+                          return "phone must not be empty";
+                        }
+                        return null;
+                      },
+                      onChange: (value) {
+                        print(value);
+                      },
+                    ),
+                    SizedBox(
+                      height: 30,
+                    ),
+                    Container(
+                      height: 50,
+                      width: double.infinity,
+                      child: MaterialButton(
+                        color: Colors.blue,
+                        onPressed: () {
+                          ShopLayoutCubit.get(context)
+                              .update_data(name.text, email.text, phone.text);
+                        },
+                        child: Text(
+                          "UPdate",
+                          style: TextStyle(color: Colors.white),
+                        ),
                       ),
                     ),
-                  ),
-                  SizedBox(
-                    height: 15,
-                  ),
-                  Container(
-                    height: 50,
-                    width: double.infinity,
-                    child: MaterialButton(
-                      color: Colors.blue,
-                      onPressed: () {
-                        CacthHelper.Clear('takon');
-                        Navigator.pushAndRemoveUntil(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => Login(),
-                            ),
-                            (route) => false);
-                      },
-                      child: Text(
-                        "LOGOUT",
-                        style: TextStyle(color: Colors.white),
+                    SizedBox(
+                      height: 15,
+                    ),
+                    Container(
+                      height: 50,
+                      width: double.infinity,
+                      child: MaterialButton(
+                        color: Colors.blue,
+                        onPressed: () {
+                          CacthHelper.Clear('takon');
+                          Navigator.pushAndRemoveUntil(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => Login(),
+                              ),
+                                  (route) => false);
+                        },
+                        child: Text(
+                          "LOGOUT",
+                          style: TextStyle(color: Colors.white),
+                        ),
                       ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
             ),
           ),
+          fallback:(context) =>  Center(child: CircularProgressIndicator()),
         );
       },
     );

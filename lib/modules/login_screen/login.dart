@@ -2,6 +2,7 @@ import 'package:conditional_builder/conditional_builder.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:shop_app/layout/shop_layout/Shop_Layout_cubit/shop_layout_cubit.dart';
 import 'package:shop_app/layout/shop_layout/shop_layout.dart';
 import 'package:shop_app/modules/login_screen/login_cubit/login_cubit.dart';
 import 'package:shop_app/modules/login_screen/login_cubit/login_status.dart';
@@ -38,6 +39,11 @@ class _LoginState extends State<Login> {
             CacthHelper.saveData('takon', state.loginModels.data!.toaken)
                 .then((value) {
               takon=state.loginModels.data!.toaken!;
+              ShopLayoutCubit.get(context).get_data_proflie();
+              ShopLayoutCubit.get(context).get_favorite();
+              ShopLayoutCubit.get(context).get_home_data();
+              ShopLayoutCubit.get(context).get_category_product();
+              ShopLayoutCubit.get(context).get_categories();
 
                 Navigator.pushAndRemoveUntil(
                     context,
