@@ -34,7 +34,7 @@ class DioHelper {
   }) async {
     dio!.options.headers = {
       "lang": "$lang",
-      "Authorization": "${toaken ?? ''}",
+      "Authorization": toaken ?? '',
       "Content-Type": "application/json",
     };
     return await dio?.get(method, queryParameters: data);

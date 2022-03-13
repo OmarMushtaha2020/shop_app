@@ -4,41 +4,44 @@ import 'package:shop_app/layout/shop_layout/Shop_Layout_cubit/shop_layout_cubit.
 import 'package:shop_app/layout/shop_layout/Shop_Layout_cubit/shop_layout_states.dart';
 import 'package:shop_app/modules/login_screen/login.dart';
 import 'package:shop_app/shared/components/components.dart';
-import 'package:shop_app/shared/components/constant.dart';
 import 'package:shop_app/shared/network/local/cacth_helper.dart';
 
 class SettingsPage extends StatelessWidget {
-  var name=TextEditingController();
-  var email=TextEditingController();
-  var phone=TextEditingController();
+  var name = TextEditingController();
+  var email = TextEditingController();
+  var phone = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<ShopLayoutCubit,ShopeLayoutStates>(
+    return BlocConsumer<ShopLayoutCubit, ShopeLayoutStates>(
       listener: (context, state) {
-
+        if(state is GetUserDataSuccessed){
+          var model = ShopLayoutCubit.get(context).userModel;
+          email.text = model!.data!.email!;
+          name.text = model.data!.name!;
+          phone.text = model.data!.phone!;
+        }
       },
       builder: (context, state) {
-        email.text=userData!.data!.email!;
-        name.text=userData!.data!.name!;
-        phone.text=userData!.data!.phone!;
 
-        return  Scaffold(
+
+        return Scaffold(
           appBar: AppBar(),
           body: Padding(
             padding: const EdgeInsets.all(20.0),
             child: SingleChildScrollView(
               child: Column(
                 children: [
-
-
-                  SizedBox(height: 20,),
+                  SizedBox(
+                    height: 20,
+                  ),
                   defaultFormField(
-                    label: "Name", controller:name ,
+                    label: "Name",
+                    controller: name,
                     keyboardType: TextInputType.name,
                     prefix: Icons.person,
                     validate: (value) {
-                      if(value!.isEmpty){
+                      if (value!.isEmpty) {
                         return "Name must not be empty";
                       }
                       return null;
@@ -51,11 +54,12 @@ class SettingsPage extends StatelessWidget {
                     height: 15,
                   ),
                   defaultFormField(
-                    label: "Email Address", controller:email ,
+                    label: "Email Address",
+                    controller: email,
                     keyboardType: TextInputType.emailAddress,
                     prefix: Icons.email,
                     validate: (value) {
-                      if(value!.isEmpty){
+                      if (value!.isEmpty) {
                         return "email must not be empty";
                       }
                       return null;
@@ -68,11 +72,12 @@ class SettingsPage extends StatelessWidget {
                     height: 15,
                   ),
                   defaultFormField(
-                    label: "Phone", controller:phone ,
+                    label: "Phone",
+                    controller: phone,
                     keyboardType: TextInputType.phone,
                     prefix: Icons.phone,
                     validate: (value) {
-                      if(value!.isEmpty){
+                      if (value!.isEmpty) {
                         return "phone must not be empty";
                       }
                       return null;
@@ -81,15 +86,17 @@ class SettingsPage extends StatelessWidget {
                       print(value);
                     },
                   ),
-                  SizedBox(height: 30,),
+                  SizedBox(
+                    height: 30,
+                  ),
                   Container(
                     height: 50,
                     width: double.infinity,
                     child: MaterialButton(
                       color: Colors.blue,
-
                       onPressed: () {
-               ShopLayoutCubit.get(context).update_data(name.text, email.text, phone.text);
+                        ShopLayoutCubit.get(context)
+                            .update_data(name.text, email.text, phone.text);
                       },
                       child: Text(
                         "UPdate",
@@ -97,14 +104,14 @@ class SettingsPage extends StatelessWidget {
                       ),
                     ),
                   ),
-
-                  SizedBox(height: 15,),
+                  SizedBox(
+                    height: 15,
+                  ),
                   Container(
                     height: 50,
                     width: double.infinity,
                     child: MaterialButton(
                       color: Colors.blue,
-
                       onPressed: () {
                         CacthHelper.Clear('takon');
                         Navigator.pushAndRemoveUntil(
@@ -112,7 +119,7 @@ class SettingsPage extends StatelessWidget {
                             MaterialPageRoute(
                               builder: (context) => Login(),
                             ),
-                                (route) => false);
+                            (route) => false);
                       },
                       child: Text(
                         "LOGOUT",

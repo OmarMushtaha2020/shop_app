@@ -37,13 +37,13 @@ class _LoginState extends State<Login> {
             showTest(state.loginModels.message, Status.succeeded);
             CacthHelper.saveData('takon', state.loginModels.data!.toaken)
                 .then((value) {
-              if (value != null) {
+              takon=state.loginModels.data!.toaken!;
+
                 Navigator.pushAndRemoveUntil(
                     context,
                     MaterialPageRoute(builder: (context) => ShopLayout()),
                     (route) => false);
-              takon=state.loginModels.data!.toaken!;
-              }
+
             });
           } else {
             print(state.loginModels.message);

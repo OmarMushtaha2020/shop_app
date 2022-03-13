@@ -37,7 +37,8 @@ class  ChangeFavoritesSuccessed extends ShopeLayoutStates {
 ChangeFavoritesSuccessed (this.favorite);
 }
 class GetUserDataSuccessed extends ShopeLayoutStates{
-
+  ShopLoginModels ?userModel;
+  GetUserDataSuccessed ( this.userModel);
 }
 class GetUserDataFailed extends ShopeLayoutStates{
 

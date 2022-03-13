@@ -11,6 +11,7 @@ class LoginCubit extends Cubit<LoginStatus> {
   LoginCubit() : super(InitialStatues());
 
   static LoginCubit get(context) => BlocProvider.of(context);
+  ShopLoginModels ?loginModel;
 
   void login(String password, email) {
     emit(LoadLogin());
@@ -20,8 +21,8 @@ class LoginCubit extends Cubit<LoginStatus> {
     }, method: 'login')
         .then((value) {
       // print(value);
-      userData = ShopLoginModels.fromjson(value!.data);
-      emit(LoginSucceeded(userData!));
+      loginModel = ShopLoginModels.fromjson(value!.data);
+      emit(LoginSucceeded(loginModel!));
     }).catchError((Error) {
       print(Error.toString());
       emit(LoginFail(Error.toString()));
@@ -37,17 +38,6 @@ class LoginCubit extends Cubit<LoginStatus> {
         isPassword ? Icons.visibility_outlined : Icons.visibility_off_outlined;
     emit(ShopChangePasswordVisibilityState());
   }
-  void register(String name,String email,String password,String phone){
-    DioHelper.post_data(method: 'register', data: {
-      "name":'$name',
-      "email":'$email',
-      "password":'$password',
-      "phone":'$phone',
-    }).then((value) {
-      userData= ShopLoginModels.fromjson(value!.data);
-      emit(RegisterSucceeded(userData!));
-    }).catchError((Error){
-      emit(RegisterFail(Error.toString()));
-    });
-  }
+  // ShopLoginModels ?loginModel;
+
 }

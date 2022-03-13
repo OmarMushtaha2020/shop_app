@@ -33,11 +33,17 @@ class ShopLayoutCubit extends Cubit<ShopeLayoutStates> {
 
   void change_buttons_index(int value) {
     index = value;
+   if(index==0){
+      get_home_data();
+   }
     if (index == 1) {
       get_categories();
     }
     if(index==2){
     get_favorite();
+    }
+    if(index==3){
+get_data_proflie();
     }
     emit(ChangeButtonsIndex());
   }
@@ -126,10 +132,12 @@ Future<void> get_favorite()  async{
 
 
 }
+  ShopLoginModels ?userModel;
+
 void get_data_proflie(){
   DioHelper.get_data(method: 'profile',toaken: takon).then((value) {
-   userData=ShopLoginModels.fromjson(value!.data);
-    emit(GetUserDataSuccessed());
+    userModel=ShopLoginModels.fromjson(value!.data);
+    emit(GetUserDataSuccessed(userModel));
   }).catchError((error){
    print(error.toString());
     emit(GetUserDataFailed());
@@ -142,8 +150,8 @@ DioHelper.put_data(toaken: takon,method: 'update-profile', data: {
   "email":'$email',
   "phone":'$phone',
 }).then((value) {
-  userData=ShopLoginModels.fromjson(value!.data);
-emit(UpdateDataSuccessed(userData));
+  userModel=ShopLoginModels.fromjson(value!.data);
+emit(UpdateDataSuccessed(userModel));
 
 }).catchError((Error){
   emit(UpdateDataFailed());

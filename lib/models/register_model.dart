@@ -5,9 +5,11 @@ class RegisterModel {
   RegisterModel.fromJson(Map<String, dynamic> json) {
     status = json['status'];
     message = json['message'];
-    data = (json['data'] != null ?  Data.fromJson(json['data']) : null)!;
+    data = json['data'] != null ?  Data.fromJson(json['data']) : null;
   }
+
 }
+
 class Data {
   String? name;
   String? email;
@@ -15,6 +17,8 @@ class Data {
   int? id;
   String? image;
   String? token;
+
+
   Data.fromJson(Map<String, dynamic> json) {
     name = json['name'];
     email = json['email'];
@@ -23,4 +27,5 @@ class Data {
     image = json['image'];
     token = json['token'];
   }
+
 }
