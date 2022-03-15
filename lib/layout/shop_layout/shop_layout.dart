@@ -30,6 +30,7 @@ class ShopLayout extends StatelessWidget {
                         ));
                   },
                   icon: Icon(Icons.search)),
+
             ],
           ),
           body: ShopLayoutCubit.get(context)

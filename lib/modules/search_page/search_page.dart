@@ -4,62 +4,67 @@ import 'package:shop_app/layout/shop_layout/Shop_Layout_cubit/shop_layout_cubit.
 import 'package:shop_app/layout/shop_layout/Shop_Layout_cubit/shop_layout_states.dart';
 import 'package:shop_app/models/SearchModel.dart';
 import 'package:shop_app/modules/Product_details.dart';
+import 'package:shop_app/modules/search_page/search_bloc/bloc.dart';
+import 'package:shop_app/modules/search_page/search_bloc/statues.dart';
 
 class SearchPage extends StatelessWidget {
 var text=TextEditingController();
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<ShopLayoutCubit,ShopeLayoutStates>(
-      listener:  (context, state) {
+    return BlocProvider(
+      create: (context) => SearchCubit(),
+      child: BlocConsumer<SearchCubit,searchstatues>(
+        listener:  (context, state) {
 
-      },
-      builder: (context, state) {
-    return  Scaffold(
-          appBar: AppBar(),
-          body: Column(
+        },
+        builder: (context, state) {
+      return  Scaffold(
+            appBar: AppBar(),
+            body: Column(
 
-            children: [
-              Padding(
-                padding: const EdgeInsets.all(20.0),
-                child: TextFormField(
-                  controller: text,
-                  onChanged: (String value) {
-ShopLayoutCubit.get(context).search(value);
-                  },
-                  decoration: InputDecoration(
-                    border: OutlineInputBorder(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.all(20.0),
+                  child: TextFormField(
+                    controller: text,
+                    onChanged: (String value) {
+SearchCubit.get(context).search(value);
+                    },
+                    decoration: InputDecoration(
+                      border: OutlineInputBorder(
 
-                    )
-                    ,prefixIcon: Icon(Icons.search),
+                      )
+                      ,prefixIcon: Icon(Icons.search),
+                    ),
                   ),
                 ),
-              ),
-             if(state is SearchModelSuccessed)
-              Expanded(
+               if(state is SearchSuccessed)
+                Expanded(
 
-                child: ListView.separated(physics: BouncingScrollPhysics(),itemBuilder: (context, index) =>
-        get_search_product(ShopLayoutCubit.get(context).searchModel!.data!.pc![index],context
-        )
+                  child: ListView.separated(physics: BouncingScrollPhysics(),itemBuilder: (context, index) =>
+          get_search_product(SearchCubit.get(context).searchModel!.data!.pc![index],context
+          )
 
-                    , separatorBuilder: (context, index) => Container(
-                  height: 1,
-                  width: double.infinity,
-                  color: Colors.grey[100],
-                ), itemCount: ShopLayoutCubit.get(context).searchModel!.data!.pc!.length
-                ),
-              ),
-
-              if(ShopLayoutCubit.get(context).searchModel==null)
-                Padding(
-                  padding: const EdgeInsets.only(top: 300),
-                  child: Text("Please enter the item"),
+                      , separatorBuilder: (context, index) => Container(
+                    height: 1,
+                    width: double.infinity,
+                    color: Colors.grey[100],
+                  ), itemCount: SearchCubit.get(context).searchModel!.data!.pc!.length
+                  ),
                 ),
 
-            ],
-          ),
-        );
+                if(SearchCubit.get(context).searchModel==null)
+                  Padding(
+                    padding: const EdgeInsets.only(top: 300),
+                    child: Text("Please enter the item"),
+                  ),
 
-      },
+              ],
+            ),
+          );
+
+        },
+      ),
     );
   }
 Widget get_search_product( Products product,context) => Padding(
@@ -144,13 +149,13 @@ Widget get_search_product( Products product,context) => Padding(
                   CircleAvatar(
                     radius: 15.0,
                     backgroundColor: ShopLayoutCubit.get(context)
-                        .Favorite[product.id]
-                    ??true
+                        .Favorite[product.id]!
                         ? Colors.blue
                         : Colors.grey,
                     child: IconButton(
                       onPressed: () {
                         ShopLayoutCubit.get(context).change_favorites(product.id!);
+                        print("S");
                       },
                       icon: Icon(
                         Icons.favorite_border,

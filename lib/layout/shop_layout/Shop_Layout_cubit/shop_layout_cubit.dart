@@ -44,6 +44,7 @@ class ShopLayoutCubit extends Cubit<ShopeLayoutStates> {
     }
     if(index==3){
 get_data_proflie();
+
     }
     emit(ChangeButtonsIndex());
   }
@@ -157,18 +158,7 @@ emit(UpdateDataSuccessed(userModel));
   emit(UpdateDataFailed());
 });
 }
-  SearchModel? searchModel;
-Future<void>  search(String text ) async {
-  DioHelper.post_data(method: 'products/search', data: {
-    'text':'$text',
-  },toaken: takon).then((value){
-    searchModel=SearchModel.fromJson(value!.data);
-    emit(SearchModelSuccessed());
-  }).catchError((Error){
-   print(Error.toString());
-    emit(SearchModelFail(Error.toString()));
-  });
-}
+
 }
 
 
