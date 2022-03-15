@@ -43,7 +43,7 @@ SearchCubit.get(context).search(value);
 
                   child: ListView.separated(physics: BouncingScrollPhysics(),itemBuilder: (context, index) =>
           get_search_product(SearchCubit.get(context).searchModel!.data!.pc![index],context
-          )
+          ,false)
 
                       , separatorBuilder: (context, index) => Container(
                     height: 1,
@@ -67,7 +67,7 @@ SearchCubit.get(context).search(value);
       ),
     );
   }
-Widget get_search_product( Products product,context) => Padding(
+Widget get_search_product( Products product,context,bool isbored) => Padding(
   padding: const EdgeInsets.all(20.0),
   child: Container(
     height: 120,
@@ -94,7 +94,7 @@ Widget get_search_product( Products product,context) => Padding(
                 width: 120,
                 // fit: BoxFit.cover,
               ),
-              if (product.price != 0)
+              if (product.price != 0&&isbored)
                 Container(
                   padding: EdgeInsets.symmetric(horizontal: 5),
                   color: Colors.red,
@@ -136,7 +136,7 @@ Widget get_search_product( Products product,context) => Padding(
                   SizedBox(
                     width: 5.0,
                   ),
-                  if (product.price != 0)
+                  if (product.price != 0&&isbored)
                     Text(
                       "${product.price}",
                       style: TextStyle(
