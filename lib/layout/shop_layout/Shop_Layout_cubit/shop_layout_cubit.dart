@@ -75,7 +75,7 @@ get_data_proflie();
   }
 
   Future<void> get_category_product() async {
-    emit(LoadGetCategory());
+    emit(LoadGetCategoryProduct());
     await DioHelper.get_data(toaken: takon, method: 'products', data: {
       'category_id': id,
     }).then((value) {

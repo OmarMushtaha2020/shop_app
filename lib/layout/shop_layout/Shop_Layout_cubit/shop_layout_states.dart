@@ -11,9 +11,9 @@ class GetHomeDataSuccessed extends ShopeLayoutStates {}
 class LoadGetHomeData extends ShopeLayoutStates{}
 class GetHomeDataFailed extends ShopeLayoutStates {}
 class Succe extends ShopeLayoutStates {}
-class LoadGetCategory extends ShopeLayoutStates {}
+class LoadGetCategoryProduct extends ShopeLayoutStates {}
 class GetFaviroteSuccessed extends ShopeLayoutStates {}
-
+class LoadGetCategory extends ShopeLayoutStates{}
 class GetCategorysSuccessed extends ShopeLayoutStates {}
 
 class GetCategorysFailed extends ShopeLayoutStates {}

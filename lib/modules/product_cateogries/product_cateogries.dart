@@ -1,3 +1,4 @@
+import 'package:conditional_builder/conditional_builder.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shop_app/layout/shop_layout/Shop_Layout_cubit/shop_layout_cubit.dart';
@@ -11,12 +12,17 @@ class ProductCaterogries extends StatelessWidget {
     return BlocConsumer<ShopLayoutCubit, ShopeLayoutStates>(
       listener: (context, state) {},
       builder: (context, state) {
-        return Scaffold(
-          appBar: AppBar(),
-          body: SingleChildScrollView(
-              physics: BouncingScrollPhysics(),
-              child: build_item(
-                  ShopLayoutCubit.get(context).categoryProducts!, context)),
+        return ConditionalBuilder(
+condition: state is! LoadGetCategoryProduct,
+          builder: (context) => Scaffold(
+
+            appBar: AppBar(),
+            body: SingleChildScrollView(
+                physics: BouncingScrollPhysics(),
+                child: build_item(
+                    ShopLayoutCubit.get(context).categoryProducts!, context)),
+          ) ,
+fallback: (context) => Container(color: Colors.white,child: Center(child: CircularProgressIndicator())),
         );
       },
     );
@@ -109,7 +115,7 @@ class ProductCaterogries extends StatelessWidget {
                       CircleAvatar(
                         radius: 15.0,
                         backgroundColor:
-                            ShopLayoutCubit.get(context).Favorite[products.id]!
+                            ShopLayoutCubit.get(context).Favorite[products.id]??false
                                 ? Colors.blue
                                 : Colors.grey,
                         child: IconButton(
