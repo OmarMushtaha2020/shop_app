@@ -20,3 +20,4 @@ class ShopRegisterErrorState extends ShopRegisterStates
 }
 
 class ShopRegisterChangePasswordVisibilityState extends ShopRegisterStates {}
+class ChangePassword extends ShopRegisterStates {}

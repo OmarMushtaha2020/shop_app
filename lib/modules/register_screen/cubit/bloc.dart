@@ -1,4 +1,6 @@
 import 'package:bloc/bloc.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shop_app/models/register_model.dart';
 import 'package:shop_app/modules/register_screen/cubit/statues.dart';
@@ -9,18 +11,9 @@ class RegisterCubit extends Cubit<ShopRegisterStates> {
 
   static RegisterCubit get(context) => BlocProvider.of(context);
 
-
-  // IconData suffix = Icons.visibility_outlined;
-  // bool isPassword = true;
-
-  // void changePasswordVisibility() {
-  //   isPassword = !isPassword;
-  //   suffix =
-  //   isPassword ? Icons.visibility_outlined : Icons.visibility_off_outlined;
-  //   emit(ShopChangePasswordVisibilityState());
-  // }
   RegisterModel?registerModel;
   void register( name, email, password, phone){
+    emit(ShopRegisterLoadingState());
     DioHelper.post_data(method: 'register', data: {
       "name":name,
       "email":email,
@@ -32,5 +25,13 @@ class RegisterCubit extends Cubit<ShopRegisterStates> {
     }).catchError((Error){
       emit(ShopRegisterErrorState(Error.toString()));
     });
+
+  }
+  IconData icons=Icons.visibility;
+  bool ispassword=true;
+  void changePassword(){
+    ispassword=!ispassword;
+    icons=ispassword?Icons.visibility:Icons.visibility_off;
+  emit(ChangePassword());
   }
 }

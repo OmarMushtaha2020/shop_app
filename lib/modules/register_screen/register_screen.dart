@@ -1,3 +1,4 @@
+import 'package:conditional_builder/conditional_builder.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -84,6 +85,8 @@ class RegtsterScreen extends StatelessWidget {
                             height: 30,
                           ),
                           TextFormField(
+                            keyboardType: TextInputType.name,
+
                             validator: (value) {
                               if (value!.isEmpty) {
                                 return "please enter your Name address ";
@@ -99,6 +102,8 @@ class RegtsterScreen extends StatelessWidget {
                           SizedBox(height: 15,),
 
                           TextFormField(
+                            keyboardType: TextInputType.emailAddress,
+
                             validator: (value) {
                               if (value!.isEmpty) {
                                 return "please enter your email address ";
@@ -109,33 +114,23 @@ class RegtsterScreen extends StatelessWidget {
                             decoration: InputDecoration(
                                 border: OutlineInputBorder(),
                                 labelText: "Email Address",
-                                prefixIcon: Icon(Icons.email_outlined)),
+                                prefixIcon: Icon(Icons.email)),
                           ),
                           SizedBox(
                             height: 15,
                           ),
-                          defaultFormField(
-                            controller: passwords,
-                            keyboardType: TextInputType.visiblePassword,
-                            onSubmit: (value) {
-
-                            },
-                            validate: (String? value) {
-                              if (value!.isEmpty) {
-                                return 'password is too short';
-                              }
-                            },
-                            label: 'Password',
-                            prefix: Icons.lock_outline,
-                            suffix: LoginCubit.get(context).suffix,
-                            isPassword: LoginCubit.get(context).isPassword,
-                            suffixPressed: () {
-                              LoginCubit.get(context).changePasswordVisibility();
-                            },
-                          ),
+                          TextFromFeildPassword("Password", Icons.lock, RegisterCubit.get(context).icons, (){
+                            RegisterCubit.get(context).changePassword();
+                          },  RegisterCubit.get(context).ispassword,passwords,TextInputType.text,
+                              (value){
+    if (value!.isEmpty) {
+          return 'password is too short';
+        }
+      },
+                               ),
                           SizedBox(height: 15,),
                           TextFormField(
-
+keyboardType: TextInputType.number,
                             validator: (value) {
                               if (value!.isEmpty) {
                                 return "please enter your phone  ";
@@ -162,27 +157,31 @@ class RegtsterScreen extends StatelessWidget {
                           SizedBox(
                             height: 30,
                           ),
-                             Container(
-                              color: Colors.blue,
-                              width: double.infinity,
-                              height: 50,
-                              child: MaterialButton(
-                                onPressed: () {
-                                  if (froms.currentState!.validate()) {
-                                    RegisterCubit.get(context).register(
-                                      names.text,
-                                      emails.text,
-                                      passwords.text,
-                                      phones.text,
-                                    );
-                                  }
-                                },
-                                child: Text(
-                                  "REGISTER",
-                                  style: TextStyle(color: Colors.white),
-                                ),
-                              ),
-                            ),
+                             ConditionalBuilder(
+                               condition: state is!ShopRegisterLoadingState,
+                               builder: (context) => Container(
+                               color: Colors.blue,
+                               width: double.infinity,
+                               height: 50,
+                               child: MaterialButton(
+                                 onPressed: () {
+                                   if (froms.currentState!.validate()) {
+                                     RegisterCubit.get(context).register(
+                                       names.text,
+                                       emails.text,
+                                       passwords.text,
+                                       phones.text,
+                                     );
+                                   }
+                                 },
+                                 child: Text(
+                                   "REGISTER",
+                                   style: TextStyle(color: Colors.white),
+                                 ),
+                               ),
+                             ),
+                               fallback:(context) => Center(child: CircularProgressIndicator()) ,
+                             ),
 
                           SizedBox(
                             height: 15,

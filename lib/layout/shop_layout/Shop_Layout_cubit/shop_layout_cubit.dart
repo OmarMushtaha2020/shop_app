@@ -146,6 +146,7 @@ void get_data_proflie(){
 
 }
 void update_data(String name,String email,String phone){
+  emit(LoadUpdateData());
 DioHelper.put_data(toaken: takon,method: 'update-profile', data: {
   "name":'$name',
   "email":'$email',

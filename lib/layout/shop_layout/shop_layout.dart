@@ -15,6 +15,10 @@ class ShopLayout extends StatelessWidget {
           showTest(state.favorite!.message!, Status.error);
         }
         }
+        if(state is UpdateDataSuccessed){
+          showTest(state.loginModels!.message, Status.succeeded);
+
+        }
       },
       builder: (context, state) {
         return Scaffold(

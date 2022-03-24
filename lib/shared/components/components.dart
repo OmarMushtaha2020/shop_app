@@ -1,5 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+Widget TextFromFeildPassword(String?text,IconData prefixIcon ,IconData suffixIcon, VoidCallback? funtion,bool ispaswword,TextEditingController controller,TextInputType type,FormFieldValidator<String>? validator)=>TextFormField(
+  obscureText:ispaswword ,
+  controller: controller,
+  validator: validator,
+  keyboardType: type,
+  decoration: InputDecoration(
+    border: OutlineInputBorder(
+    ),
+    labelText: "$text",
+    prefixIcon: Icon(prefixIcon),
+    suffixIcon: IconButton(onPressed:funtion ,icon:Icon(suffixIcon)) ),
+
+
+
+);
+
 
 Widget defaultFormField({
   required TextEditingController controller,

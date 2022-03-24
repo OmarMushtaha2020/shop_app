@@ -15,7 +15,7 @@ class LoadGetCategoryProduct extends ShopeLayoutStates {}
 class GetFaviroteSuccessed extends ShopeLayoutStates {}
 class LoadGetCategory extends ShopeLayoutStates{}
 class GetCategorysSuccessed extends ShopeLayoutStates {}
-
+class LoadUpdateData extends ShopeLayoutStates{}
 class GetCategorysFailed extends ShopeLayoutStates {}
 class UpdateDataSuccessed extends ShopeLayoutStates {
   ShopLoginModels? loginModels;
