@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:conditional_builder/conditional_builder.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -44,11 +45,14 @@ class CateogriesPage extends StatelessWidget {
           padding: const EdgeInsets.all(20.0),
           child: Row(
             children: [
-              Image(
-                image: NetworkImage("${data.image}"),
+              CachedNetworkImage(
+                imageUrl: "${data.image}",
                 height: 100,
                 width: 100,
                 fit: BoxFit.cover,
+
+                placeholder: (context, url) => Container(),
+                errorWidget: (context, url, error) => Icon(Icons.error),
               ),
               SizedBox(
                 width: 20,

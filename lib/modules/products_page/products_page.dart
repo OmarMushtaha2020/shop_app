@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:conditional_builder/conditional_builder.dart';
 import 'package:flutter/material.dart';
@@ -18,7 +19,7 @@ class ProductsPage extends StatelessWidget {
       listener: (context, state) {},
       builder: (context, state) {
         return ConditionalBuilder(
-          condition: ShopLayoutCubit.get(context).home != null ,
+          condition: ShopLayoutCubit.get(context).home!=null ,
           builder: (context) => bulid_products(
               ShopLayoutCubit.get(context).home!,
               ShopLayoutCubit.get(context).categories!,
@@ -38,11 +39,13 @@ class ProductsPage extends StatelessWidget {
           children: [
             CarouselSlider(
                 items: home.data!.banners!
-                    .map((e) => Image(
-                          image: NetworkImage('${e.image}'),
-                          fit: BoxFit.cover,
-                          width: double.infinity,
-                        ))
+                    .map((e) => CachedNetworkImage(
+                  imageUrl: "${e.image}",
+                  width: double.infinity,
+                  fit: BoxFit.cover,
+                  placeholder: (context, url) => Center(child: Container()),
+                  errorWidget: (context, url, error) => Icon(Icons.error),
+                ),)
                     .toList(),
                 options: CarouselOptions(
                   height: 250,
@@ -71,18 +74,20 @@ class ProductsPage extends StatelessWidget {
             ),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 10),
-              child: Container(
-                  height: 100,
-                  child: ListView.separated(
-                      physics: BouncingScrollPhysics(),
-                      scrollDirection: Axis.horizontal,
-                      itemBuilder: (context, index) => bulid_categories(
-                          categories.data!.data[index], context),
-                      separatorBuilder: (context, index) => SizedBox(
-                            width: 10,
-                          ),
-                      itemCount: categories.data!.data.length)),
-            ),
+              child:Container(
+                    height: 100,
+                    child: ListView.separated(
+                        physics: BouncingScrollPhysics(),
+                        scrollDirection: Axis.horizontal,
+                        itemBuilder: (context, index) => bulid_categories(
+                            categories.data!.data[index], context),
+                        separatorBuilder: (context, index) => SizedBox(
+                          width: 10,
+                        ),
+                        itemCount: categories.data!.data.length)),
+
+              ),
+
             SizedBox(
               height: 10,
             ),
@@ -130,11 +135,18 @@ class ProductsPage extends StatelessWidget {
                 child: Stack(
                   alignment: Alignment.bottomLeft,
                   children: [
-                    Image(
-                      image: NetworkImage('${products.image}'),
+
+                    Container(
                       height: 190,
                       width: double.infinity,
+
+                      child: CachedNetworkImage(
+                        imageUrl:"${products.image}",
+                        placeholder: (context, url) => Container(),
+                        errorWidget: (context, url, error) => Center(child: Icon(Icons.error)),
+                      ),
                     ),
+
                     if (products.discount != 0)
                       Container(
                         padding: EdgeInsets.symmetric(horizontal: 5),
@@ -260,12 +272,15 @@ class ProductsPage extends StatelessWidget {
                 print(id);
               }
             },
-            child: Image(
-              image: NetworkImage("${data.image}"),
+            child:CachedNetworkImage(
+              imageUrl: "${data.image}",
               width: 100,
               height: 100,
               fit: BoxFit.cover,
+              placeholder: (context, url) => Container(),
+              errorWidget: (context, url, error) => Icon(Icons.error),
             ),
+
           ),
           Container(
             width: 100,

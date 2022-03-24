@@ -31,6 +31,8 @@ dependencies:
   smooth_page_indicator: ^1.0.0+2
   hexcolor: ^2.0.1
   dio: ^4.0.4
+  cached_network_image: ^2.3.3
+
   shared_preferences: ^2.0.0
   flutter_bloc: ^8.0.1
   bloc: ^8.0.2

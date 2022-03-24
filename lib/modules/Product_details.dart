@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -27,7 +28,11 @@ class Productdetails extends StatelessWidget {
                 Expanded(
                     child: Padding(
                       padding: const EdgeInsets.all(8.0),
-                      child: Image(image: NetworkImage("$image")),
+                      child: CachedNetworkImage(
+                        imageUrl: "$image",
+                        placeholder: (context, url) => Container(),
+                        errorWidget: (context, url, error) => Icon(Icons.error),
+                      ),
                     )),
                 // SizedBox(height: 100,),
                 Container(

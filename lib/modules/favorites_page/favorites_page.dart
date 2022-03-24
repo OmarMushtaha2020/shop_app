@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:conditional_builder/conditional_builder.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -71,11 +72,12 @@ fallback:(context) =>  Center(child: CircularProgressIndicator()),
                 child: Stack(
                   alignment: Alignment.bottomLeft,
                   children: [
-                    Image(
-                      image: NetworkImage('${ product!.image}'),
-                      height: 200,
+                    CachedNetworkImage(
+                      imageUrl: "${product!.image}",
                       width: 120,
-                      // fit: BoxFit.cover,
+                      height: 200,
+                      placeholder: (context, url) => Container(),
+                      errorWidget: (context, url, error) => Icon(Icons.error),
                     ),
                     if (  product.discount != 0)
                       Container(

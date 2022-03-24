@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shop_app/layout/shop_layout/Shop_Layout_cubit/shop_layout_cubit.dart';
@@ -88,13 +89,13 @@ Widget get_search_product( Products product,context,bool isbored) => Padding(
           child: Stack(
             alignment: Alignment.bottomLeft,
             children: [
-              Image(
-                image: NetworkImage('${product.image}'),
+              CachedNetworkImage(
+                imageUrl: "${product.image}",
                 height: 200,
                 width: 120,
-                // fit: BoxFit.cover,
-              ),
-              if (product.price != 0&&isbored)
+                placeholder: (context, url) => Container(),
+                errorWidget: (context, url, error) => Icon(Icons.error),
+              ),              if (product.price != 0&&isbored)
                 Container(
                   padding: EdgeInsets.symmetric(horizontal: 5),
                   color: Colors.red,
@@ -149,7 +150,7 @@ Widget get_search_product( Products product,context,bool isbored) => Padding(
                   CircleAvatar(
                     radius: 15.0,
                     backgroundColor: ShopLayoutCubit.get(context)
-                        .Favorite[product.id]!
+                        .Favorite[product.id]??true
                         ? Colors.blue
                         : Colors.grey,
                     child: IconButton(
