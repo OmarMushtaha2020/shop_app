@@ -11,7 +11,7 @@ class SearchCubit extends Cubit<searchstatues>{
 
  static SearchCubit get(context)=>BlocProvider.of(context);
   SearchModel? searchModel;
-  Future<void>  search(String text ) async {
+  void  search(String text ) async {
     DioHelper.post_data(method: 'products/search', data: {
       'text':'$text',
     },toaken: takon).then((value){

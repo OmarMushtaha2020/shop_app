@@ -108,7 +108,7 @@ void change_favorites(int id){
         toaken: takon
     ).then((value)  {
    favorite=   Favorites.fromjson(value!.data);
-   if(favorite!.status ==false){
+   if(!favorite!.status! ){
      Favorite[id] = !Favorite[id]!;
    }else {
      get_favorite();

@@ -2,14 +2,23 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shop_app/layout/shop_layout/Shop_Layout_cubit/shop_layout_cubit.dart';
-import 'package:shop_app/layout/shop_layout/Shop_Layout_cubit/shop_layout_states.dart';
 import 'package:shop_app/models/SearchModel.dart';
 import 'package:shop_app/modules/Product_details.dart';
 import 'package:shop_app/modules/search_page/search_bloc/bloc.dart';
 import 'package:shop_app/modules/search_page/search_bloc/statues.dart';
 
-class SearchPage extends StatelessWidget {
+class SearchPage extends StatefulWidget {
+  @override
+  _SearchPageState createState() => _SearchPageState();
+}
+
+class _SearchPageState extends State<SearchPage> {
 var text=TextEditingController();
+@override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+  }
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
@@ -68,6 +77,7 @@ SearchCubit.get(context).search(value);
       ),
     );
   }
+
 Widget get_search_product( Products product,context,bool isbored) => Padding(
   padding: const EdgeInsets.all(20.0),
   child: Container(
@@ -155,7 +165,9 @@ Widget get_search_product( Products product,context,bool isbored) => Padding(
                         : Colors.grey,
                     child: IconButton(
                       onPressed: () {
-                        ShopLayoutCubit.get(context).change_favorites(product.id!);
+    setState(() {
+      ShopLayoutCubit.get(context).change_favorites(product.id!);
+    });
                         print("S");
                       },
                       icon: Icon(
@@ -174,5 +186,4 @@ Widget get_search_product( Products product,context,bool isbored) => Padding(
     ),
   ),
 );
-
 }
