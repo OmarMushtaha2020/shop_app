@@ -209,7 +209,7 @@ class _ProductsPageState extends State<ProductsPage> {
                         child: IconButton(
                           onPressed: () {
                             setState(() {
-                              ShopLayoutCubit.get(context).change_favorites(products.id!);
+                              ShopLayoutCubit.get(context).change_favorites(products.id??0);
 
                             });
                           },
@@ -228,7 +228,6 @@ class _ProductsPageState extends State<ProductsPage> {
           ],
         ),
       );
-
   Widget bulid_categories(Data data, context) => Stack(
         alignment: Alignment.bottomCenter,
         children: [
