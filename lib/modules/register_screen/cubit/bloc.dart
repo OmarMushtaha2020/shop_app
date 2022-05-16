@@ -12,13 +12,13 @@ class RegisterCubit extends Cubit<ShopRegisterStates> {
   static RegisterCubit get(context) => BlocProvider.of(context);
 
   RegisterModel?registerModel;
-  void register( name, email, password, phone){
+  void Register(String name, String email,String password,String phone){
     emit(ShopRegisterLoadingState());
     DioHelper.post_data(method: 'register', data: {
-      "name":name,
-      "email":email,
-      "password":password,
-      "phone":phone,
+      "name":"$name",
+      "email":"$email",
+      "password":"$password",
+      "phone":"$phone",
     }).then((value) {
       registerModel= RegisterModel.fromJson(value!.data);
       emit(ShopRegisterSuccessState(registerModel!));

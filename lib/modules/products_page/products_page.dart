@@ -12,7 +12,12 @@ import 'package:shop_app/modules/product_cateogries/product_cateogries.dart';
 import 'package:shop_app/shared/components/components.dart';
 import 'package:shop_app/shared/components/constant.dart';
 
-class ProductsPage extends StatelessWidget {
+class ProductsPage extends StatefulWidget {
+  @override
+  _ProductsPageState createState() => _ProductsPageState();
+}
+
+class _ProductsPageState extends State<ProductsPage> {
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<ShopLayoutCubit, ShopeLayoutStates>(
@@ -193,15 +198,20 @@ class ProductsPage extends StatelessWidget {
                           ),
                         ),
                       Spacer(),
+
                       CircleAvatar(
                         radius: 15.0,
+
                         backgroundColor:
                             ShopLayoutCubit.get(context).Favorite[products.id]!
                                 ? Colors.blue
                                 : Colors.grey,
                         child: IconButton(
                           onPressed: () {
-                            ShopLayoutCubit.get(context).change_favorites(products.id!);
+                            setState(() {
+                              ShopLayoutCubit.get(context).change_favorites(products.id!);
+
+                            });
                           },
                           icon: Icon(
                             Icons.favorite_border,

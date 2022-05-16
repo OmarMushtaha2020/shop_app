@@ -13,7 +13,8 @@ class DioHelper {
   }
 
   static Future<Response?> post_data(
-      {required String method,
+      {
+        required String method,
       required Map<String, dynamic>? data,
       String? lang = "en",
       String? toaken}

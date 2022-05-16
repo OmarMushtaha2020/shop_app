@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shop_app/layout/shop_layout/Shop_Layout_cubit/shop_layout_cubit.dart';
 import 'package:shop_app/layout/shop_layout/shop_layout.dart';
-import 'package:shop_app/modules/login_screen/login_cubit/login_cubit.dart';
 import 'package:shop_app/modules/register_screen/cubit/bloc.dart';
 import 'package:shop_app/modules/register_screen/cubit/statues.dart';
 import 'package:shop_app/shared/components/components.dart';
@@ -22,9 +21,12 @@ class RegtsterScreen extends StatelessWidget {
   var froms = GlobalKey<FormState>();
   Widget build(BuildContext context) {
     return BlocProvider(
-   create:  (context) => RegisterCubit(),
+      create:  (context) => RegisterCubit(),
       child: BlocConsumer<RegisterCubit,ShopRegisterStates>(
         listener: (context, state) {
+if(state is ShopRegisterErrorState){
+  print(state.error);
+}
           if (state is ShopRegisterSuccessState) {
             if (state.registerModel!.status!) {
               print(state.registerModel!.message);
@@ -33,19 +35,19 @@ class RegtsterScreen extends StatelessWidget {
 
               CacthHelper.saveData('takon', state.registerModel!.data!.token).then((value) {
                 print(value);
-                  takon=state.registerModel!.data!.token!;
-                  ShopLayoutCubit.get(context).get_data_proflie();
+                takon=state.registerModel!.data!.token!;
+                ShopLayoutCubit.get(context).get_data_proflie();
                 ShopLayoutCubit.get(context).get_favorite();
                 ShopLayoutCubit.get(context).get_home_data();
                 ShopLayoutCubit.get(context).get_category_product();
                 ShopLayoutCubit.get(context).get_categories();
                 Navigator.pushAndRemoveUntil(
-                      context,
-                      MaterialPageRoute(builder: (context) => ShopLayout()),
-                          (route) => false);
-                }
+                    context,
+                    MaterialPageRoute(builder: (context) => ShopLayout()),
+                        (route) => false);
+              }
 
-            );
+              );
             } else {
               print(state.registerModel!.message);
               showTest(state.registerModel!.message!, Status.error);
@@ -122,15 +124,15 @@ class RegtsterScreen extends StatelessWidget {
                           TextFromFeildPassword("Password", Icons.lock, RegisterCubit.get(context).icons, (){
                             RegisterCubit.get(context).changePassword();
                           },  RegisterCubit.get(context).ispassword,passwords,TextInputType.text,
-                              (value){
-    if (value!.isEmpty) {
-          return 'password is too short';
-        }
-      },
-                               ),
+                                (value){
+                              if (value!.isEmpty) {
+                                return 'password is too short';
+                              }
+                            },
+                          ),
                           SizedBox(height: 15,),
                           TextFormField(
-keyboardType: TextInputType.number,
+                            keyboardType: TextInputType.number,
                             validator: (value) {
                               if (value!.isEmpty) {
                                 return "please enter your phone  ";
@@ -139,7 +141,7 @@ keyboardType: TextInputType.number,
                             },
                             onFieldSubmitted: (value) {
                               if(froms.currentState!.validate()){
-                                RegisterCubit.get(context).register(
+                                RegisterCubit.get(context).Register(
                                   names.text,
                                   emails.text,
                                   passwords.text,
@@ -157,31 +159,31 @@ keyboardType: TextInputType.number,
                           SizedBox(
                             height: 30,
                           ),
-                             ConditionalBuilder(
-                               condition: state is!ShopRegisterLoadingState,
-                               builder: (context) => Container(
-                               color: Colors.blue,
-                               width: double.infinity,
-                               height: 50,
-                               child: MaterialButton(
-                                 onPressed: () {
-                                   if (froms.currentState!.validate()) {
-                                     RegisterCubit.get(context).register(
-                                       names.text,
-                                       emails.text,
-                                       passwords.text,
-                                       phones.text,
-                                     );
-                                   }
-                                 },
-                                 child: Text(
-                                   "REGISTER",
-                                   style: TextStyle(color: Colors.white),
-                                 ),
-                               ),
-                             ),
-                               fallback:(context) => Center(child: CircularProgressIndicator()) ,
-                             ),
+                          ConditionalBuilder(
+                            condition: state is!ShopRegisterLoadingState,
+                            builder: (context) => Container(
+                              color: Colors.blue,
+                              width: double.infinity,
+                              height: 50,
+                              child: MaterialButton(
+                                onPressed: () {
+                                  if (froms.currentState!.validate()) {
+                                    RegisterCubit.get(context).Register(
+                                      names.text,
+                                      emails.text,
+                                      passwords.text,
+                                      phones.text,
+                                    );
+                                  }
+                                },
+                                child: Text(
+                                  "REGISTER",
+                                  style: TextStyle(color: Colors.white),
+                                ),
+                              ),
+                            ),
+                            fallback:(context) => Center(child: CircularProgressIndicator()) ,
+                          ),
 
                           SizedBox(
                             height: 15,
