@@ -34,7 +34,7 @@ class Product {
   bool? in_cart;
 
   Product.fromjson(Map<String, dynamic> json) {
-    id = json['id'];
+    id = json ['id'];
     price = json['price'];
     old_price = json['old_price'];
     discount = json['discount'];
