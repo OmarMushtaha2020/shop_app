@@ -21,7 +21,11 @@ class _ProductsPageState extends State<ProductsPage> {
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<ShopLayoutCubit, ShopeLayoutStates>(
-      listener: (context, state) {},
+      listener: (context, state) {
+        if(state  is  ChangeFavoritesFailed){
+          print(state.errorr);
+        }
+      },
       builder: (context, state) {
         return ConditionalBuilder(
           condition: ShopLayoutCubit.get(context).home!=null ,

@@ -116,7 +116,7 @@ void change_favorites(int id){
    emit(ChangeFavoritesSuccessed(favorite));
     }).catchError((Error){
       Favorite[id] = !Favorite[id]!;
-      print(Error);
+      print(Error.toString());
       emit(ChangeFavoritesFailed(Error.toString()));
 
     });

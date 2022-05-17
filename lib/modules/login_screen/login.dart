@@ -41,6 +41,7 @@ class _LoginState extends State<Login> {
               takon=state.loginModels.data!.toaken!;
               ShopLayoutCubit.get(context).get_data_proflie();
               ShopLayoutCubit.get(context).get_favorite();
+
               ShopLayoutCubit.get(context).get_home_data();
               ShopLayoutCubit.get(context).get_category_product();
               ShopLayoutCubit.get(context).get_categories();
