@@ -87,5 +87,5 @@ Color color_status(Status toast_status) {
 }
 
 Future<void> delay(int millies) async {
-  await Future.delayed(Duration(microseconds: millies));
+  await Future.delayed(Duration(seconds: millies));
 }

@@ -15,6 +15,7 @@ import 'package:shop_app/modules/cateogries_page/cateogries_page.dart';
 import 'package:shop_app/modules/favorites_page/favorites_page.dart';
 import 'package:shop_app/modules/products_page/products_page.dart';
 import 'package:shop_app/modules/settings_page/settings_page.dart';
+import 'package:shop_app/shared/components/components.dart';
 import 'package:shop_app/shared/components/constant.dart';
 import 'package:shop_app/shared/network/remote/dio_helper.dart';
 
@@ -99,23 +100,30 @@ get_data_proflie();
     });
   }
   Favorites? favorite;
-void change_favorites(int id){
-  Favorite[id] = !Favorite[id]!;
+void change_favorites(int id)async{
+ await delay(1);
+
+   Favorite[id] = !Favorite[id]!;
     emit(ChangeFavorites());
     DioHelper.post_data(method: "favorites", data: {
       'product_id':id,
     },
         toaken: takon
-    ).then((value)  {
+    ).then((value) async {
    favorite=   Favorites.fromjson(value!.data);
    if(!favorite!.status! ){
+    await delay(1);
+
      Favorite[id] = !Favorite[id]!;
    }else {
      get_favorite();
    }
    emit(ChangeFavoritesSuccessed(favorite));
-    }).catchError((Error){
+    }).catchError((Error) async{
+    await   delay(1);
+
       Favorite[id] = !Favorite[id]!;
+
       print(Error.toString());
       emit(ChangeFavoritesFailed(Error.toString()));
 
@@ -163,4 +171,7 @@ emit(UpdateDataSuccessed(userModel));
 }
 
 
-
+// HTTP 429 means, you sent too many requests.
+// You can fix it by reducing requests or
+// you can add some delay between requests.
+// For this you can use Future delayed or Timer functions for this.

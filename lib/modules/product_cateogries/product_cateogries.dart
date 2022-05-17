@@ -6,6 +6,7 @@ import 'package:shop_app/layout/shop_layout/Shop_Layout_cubit/shop_layout_cubit.
 import 'package:shop_app/layout/shop_layout/Shop_Layout_cubit/shop_layout_states.dart';
 import 'package:shop_app/models/categories_products.dart';
 import 'package:shop_app/modules/Product_details.dart';
+import 'package:shop_app/shared/components/components.dart';
 
 class ProductCaterogries extends StatelessWidget {
   @override
@@ -117,11 +118,11 @@ fallback: (context) => Container(color: Colors.white,child: Center(child: Circul
                       CircleAvatar(
                         radius: 15.0,
                         backgroundColor:
-                            ShopLayoutCubit.get(context).Favorite[products.id]??false
-                                ? Colors.blue
-                                : Colors.grey,
+                            ShopLayoutCubit.get(context).Favorite[products.id]! ? Colors.blue : Colors.grey,
                         child: IconButton(
                           onPressed: () {
+                             delay(60);
+
                             ShopLayoutCubit.get(context).change_favorites(products.id!);
                           },
                           icon: Icon(
