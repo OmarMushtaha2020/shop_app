@@ -6,7 +6,7 @@ class ShopeLayoutStates {}
 class InitialState extends ShopeLayoutStates {}
 
 class ChangeButtonsIndex extends ShopeLayoutStates {}
-
+class AddToCart extends ShopeLayoutStates{}
 class GetHomeDataSuccessed extends ShopeLayoutStates {}
 class LoadGetHomeData extends ShopeLayoutStates{}
 class GetHomeDataFailed extends ShopeLayoutStates {}

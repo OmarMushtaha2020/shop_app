@@ -118,7 +118,7 @@ fallback: (context) => Container(color: Colors.white,child: Center(child: Circul
                       CircleAvatar(
                         radius: 15.0,
                         backgroundColor:
-                            ShopLayoutCubit.get(context).Favorite[products.id]! ? Colors.blue : Colors.grey,
+                            ShopLayoutCubit.get(context).Favorite[products.id]==products.id ? Colors.blue : Colors.grey,
                         child: IconButton(
                           onPressed: () {
                              delay(60);

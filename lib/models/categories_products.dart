@@ -23,7 +23,7 @@ class CategoryProductsData {
 }
 
 class Product {
-  int? id;
+  var id;
   dynamic? price;
   dynamic? old_price;
   dynamic? discount;

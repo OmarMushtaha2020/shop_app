@@ -39,6 +39,8 @@ dependencies:
   conditional_builder: ^1.0.2
   fluttertoast: ^8.0.8
   carousel_slider: ^4.0.0
+  http:
+
 
 dev_dependencies:
   flutter_launcher_icons: "^0.8.0"

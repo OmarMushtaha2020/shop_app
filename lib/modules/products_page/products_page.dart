@@ -9,7 +9,6 @@ import 'package:shop_app/models/categories_model.dart';
 import 'package:shop_app/models/home_model.dart';
 import 'package:shop_app/modules/Product_details.dart';
 import 'package:shop_app/modules/product_cateogries/product_cateogries.dart';
-import 'package:shop_app/shared/components/components.dart';
 import 'package:shop_app/shared/components/constant.dart';
 
 class ProductsPage extends StatefulWidget {
@@ -207,14 +206,11 @@ class _ProductsPageState extends State<ProductsPage> {
                         radius: 15.0,
 
                         backgroundColor:
-                            ShopLayoutCubit.get(context).Favorite[products.id]!
-                                ? Colors.blue
-                                : Colors.grey,
+                            ShopLayoutCubit.get(context).Favorite[products.id]??true? Colors.blue : Colors.grey,
                         child: IconButton(
                           onPressed: () {
                             setState(() {
                               ShopLayoutCubit.get(context).change_favorites(products.id??0);
-
                             });
                           },
                           icon: Icon(

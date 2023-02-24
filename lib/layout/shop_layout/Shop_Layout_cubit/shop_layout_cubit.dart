@@ -1,16 +1,20 @@
-import 'dart:math';
+
+import 'dart:convert';
 
 import 'package:bloc/bloc.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shop_app/layout/shop_layout/Shop_Layout_cubit/shop_layout_states.dart';
-import 'package:shop_app/models/SearchModel.dart';
 import 'package:shop_app/models/categories_model.dart';
 import 'package:shop_app/models/categories_products.dart';
+import 'dart:convert' as convert;
+
+import 'package:http/http.dart' as http;
 import 'package:shop_app/models/favorites_model.dart';
 import 'package:shop_app/models/get_favorites.dart';
 import 'package:shop_app/models/home_model.dart';
 import 'package:shop_app/models/shop-login-models.dart';
+import 'package:shop_app/modules/Product_details.dart';
 import 'package:shop_app/modules/cateogries_page/cateogries_page.dart';
 import 'package:shop_app/modules/favorites_page/favorites_page.dart';
 import 'package:shop_app/modules/products_page/products_page.dart';
@@ -24,14 +28,29 @@ class ShopLayoutCubit extends Cubit<ShopeLayoutStates> {
 
   static ShopLayoutCubit get(context) => BlocProvider.of(context);
   int index = 0;
-  Map<int, bool> Favorite = {};
+   Map<int, bool> Favorite = {};
   List<Widget> Screen = [
     ProductsPage(),
     CateogriesPage(),
     FavoritesPage(),
     SettingsPage(),
   ];
+  CartModel? cartModel;
+ String api="https://student.valuxapps.com/api/carts";
+  void addToCart()async{
+final response= await http.post(Uri.parse(api),body: jsonEncode({
+  "product_id":53
+}),headers: {
 
+  'Content-Type':'application/json',
+  'Authorization':takon,
+  'lang':'ar'
+
+});
+var res=convert.jsonDecode(response.body);
+cartModel=CartModel.fromJson(res);
+print(cartModel?.data?.cartItems?.length);
+}
   void change_buttons_index(int value) {
     index = value;
    if(index==0){
@@ -101,7 +120,6 @@ get_data_proflie();
   }
   Favorites? favorite;
 void change_favorites(int id)async{
- await delay(1);
 
    Favorite[id] = !Favorite[id]!;
     emit(ChangeFavorites());
@@ -112,7 +130,6 @@ void change_favorites(int id)async{
     ).then((value) async {
    favorite=   Favorites.fromjson(value!.data);
    if(!favorite!.status! ){
-    await delay(1);
 
      Favorite[id] = !Favorite[id]!;
    }else {

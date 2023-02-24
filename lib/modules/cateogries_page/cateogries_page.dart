@@ -72,8 +72,7 @@ class CateogriesPage extends StatelessWidget {
                     ShopLayoutCubit.get(context).change_categorys_id('44');
                     print(id);
                     ShopLayoutCubit.get(context).get_category_product();
-                    await delay(20000);
-                    await Navigator.push(
+                 await    Navigator.push(
                         context,
                         MaterialPageRoute(
                           builder: (context) => ProductCaterogries(),
@@ -82,7 +81,6 @@ class CateogriesPage extends StatelessWidget {
                     ShopLayoutCubit.get(context).change_categorys_id('43');
                     print(id);
                     ShopLayoutCubit.get(context).get_category_product();
-                    await delay(20000);
 
                     await Navigator.push(
                         context,
@@ -93,7 +91,6 @@ class CateogriesPage extends StatelessWidget {
                     ShopLayoutCubit.get(context).change_categorys_id('42');
                     print(id);
                     ShopLayoutCubit.get(context).get_category_product();
-                    await delay(20000);
 
                     await Navigator.push(
                         context,
@@ -104,7 +101,6 @@ class CateogriesPage extends StatelessWidget {
                     ShopLayoutCubit.get(context).change_categorys_id('40');
                     print(id);
                     ShopLayoutCubit.get(context).get_category_product();
-                    await delay(20000);
 
                     await Navigator.push(
                         context,
@@ -114,7 +110,6 @@ class CateogriesPage extends StatelessWidget {
                   } else {
                     ShopLayoutCubit.get(context).change_categorys_id('46');
                     ShopLayoutCubit.get(context).get_category_product();
-                    await delay(20000);
 
                     await Navigator.push(
                         context,

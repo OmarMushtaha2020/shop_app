@@ -65,7 +65,7 @@ class MyApp extends StatelessWidget {
             create: (context) => ShopLayoutCubit()
               ..get_home_data()
               ..get_categories()
-              ..get_category_product()
+              ..get_category_product(),
               // ..get_data_proflie()
         )
       ],
@@ -77,7 +77,7 @@ class MyApp extends StatelessWidget {
               theme: ThemeData(
                 scaffoldBackgroundColor: Colors.white,
                 textTheme: TextTheme(
-                    body1: TextStyle(
+                    bodyText1: TextStyle(
                   fontSize: 18,
                   fontWeight: FontWeight.w600,
                   color: Colors.black,
@@ -108,7 +108,7 @@ class MyApp extends StatelessWidget {
               darkTheme: ThemeData(
                 scaffoldBackgroundColor: HexColor("333739"),
                 textTheme: TextTheme(
-                    body1: TextStyle(
+                    bodyText1: TextStyle(
                         fontSize: 18,
                         fontWeight: FontWeight.w600,
                         color: Colors.white)),

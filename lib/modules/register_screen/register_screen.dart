@@ -70,7 +70,7 @@ if(state is ShopRegisterErrorState){
                         children: [
                           Text(
                             "REGISTER",
-                            style: Theme.of(context).textTheme.headline!.copyWith(
+                            style: Theme.of(context).textTheme.headline1!.copyWith(
                                 color: Colors.black,
                                 fontSize: 27,
                                 fontWeight: FontWeight.w600),
