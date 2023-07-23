@@ -1,6 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider/carousel_slider.dart';
-import 'package:conditional_builder/conditional_builder.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shop_app/layout/shop_layout/Shop_Layout_cubit/shop_layout_cubit.dart';
@@ -26,14 +25,17 @@ class _ProductsPageState extends State<ProductsPage> {
         }
       },
       builder: (context, state) {
-        return ConditionalBuilder(
-          condition: ShopLayoutCubit.get(context).home!=null ,
-          builder: (context) => bulid_products(
+        if( ShopLayoutCubit.get(context).home!=null ){
+         return bulid_products(
               ShopLayoutCubit.get(context).home!,
               ShopLayoutCubit.get(context).categories!,
-              context),
-          fallback: (context) => Center(child: CircularProgressIndicator()),
-        );
+              context);
+        }else{
+          return  Center(child: CircularProgressIndicator());
+        }
+
+
+
       },
     );
   }

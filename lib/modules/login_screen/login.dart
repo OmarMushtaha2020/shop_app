@@ -1,5 +1,3 @@
-import 'package:conditional_builder/conditional_builder.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shop_app/layout/shop_layout/Shop_Layout_cubit/shop_layout_cubit.dart';
@@ -137,9 +135,8 @@ class _LoginState extends State<Login> {
                       SizedBox(
                         height: 30,
                       ),
-                      ConditionalBuilder(
-                        condition: state is! LoadLogin,
-                        builder: (context) => Container(
+                      if(state is! LoadLogin)
+                        Container(
                           color: Colors.blue,
                           width: double.infinity,
                           child: MaterialButton(
@@ -154,9 +151,8 @@ class _LoginState extends State<Login> {
                             ),
                           ),
                         ),
-                        fallback: (context) =>
-                            Center(child: CircularProgressIndicator()),
-                      ),
+                      if(state is LoadLogin)
+                        Center(child: CircularProgressIndicator()),
                       SizedBox(
                         height: 15,
                       ),

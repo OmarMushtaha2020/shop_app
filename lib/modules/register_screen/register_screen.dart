@@ -1,5 +1,3 @@
-import 'package:conditional_builder/conditional_builder.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shop_app/layout/shop_layout/Shop_Layout_cubit/shop_layout_cubit.dart';
@@ -159,9 +157,8 @@ if(state is ShopRegisterErrorState){
                           SizedBox(
                             height: 30,
                           ),
-                          ConditionalBuilder(
-                            condition: state is!ShopRegisterLoadingState,
-                            builder: (context) => Container(
+                          if(state is!ShopRegisterLoadingState)
+                            Container(
                               color: Colors.blue,
                               width: double.infinity,
                               height: 50,
@@ -182,8 +179,8 @@ if(state is ShopRegisterErrorState){
                                 ),
                               ),
                             ),
-                            fallback:(context) => Center(child: CircularProgressIndicator()) ,
-                          ),
+                          if(state is ShopRegisterLoadingState)
+                            Center(child: CircularProgressIndicator()) ,
 
                           SizedBox(
                             height: 15,

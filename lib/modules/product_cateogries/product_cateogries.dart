@@ -1,5 +1,4 @@
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:conditional_builder/conditional_builder.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shop_app/layout/shop_layout/Shop_Layout_cubit/shop_layout_cubit.dart';
@@ -14,18 +13,20 @@ class ProductCaterogries extends StatelessWidget {
     return BlocConsumer<ShopLayoutCubit, ShopeLayoutStates>(
       listener: (context, state) {},
       builder: (context, state) {
-        return ConditionalBuilder(
-condition: state is! LoadGetCategoryProduct,
-          builder: (context) => Scaffold(
+        if(state is!LoadGetCategoryProduct){
+          return Scaffold(
 
             appBar: AppBar(),
             body: SingleChildScrollView(
                 physics: BouncingScrollPhysics(),
                 child: build_item(
                     ShopLayoutCubit.get(context).categoryProducts!, context)),
-          ) ,
-fallback: (context) => Container(color: Colors.white,child: Center(child: CircularProgressIndicator())),
-        );
+          ) ;
+        }else{
+      return    Container(color: Colors.white,child: Center(child: CircularProgressIndicator()));
+        }
+
+
       },
     );
   }

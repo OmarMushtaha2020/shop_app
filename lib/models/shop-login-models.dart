@@ -1,6 +1,6 @@
 class ShopLoginModels {
   bool? status;
-  late String message;
+   dynamic message;
 
   UserData? data;
 
@@ -12,15 +12,15 @@ class ShopLoginModels {
 }
 
 class UserData {
-  int? id;
-  String? name;
-  String? email;
-  String? phone;
-  String? image;
+  dynamic id;
+  dynamic name;
+  dynamic email;
+  dynamic phone;
+  dynamic image;
 
-  int? points;
-  int? credit;
-  String? toaken;
+  dynamic points;
+  dynamic credit;
+  dynamic toaken;
 
   UserData.fromjson(Map<String, dynamic> json) {
     id = json['id'];

@@ -1,12 +1,10 @@
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:conditional_builder/conditional_builder.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shop_app/layout/shop_layout/Shop_Layout_cubit/shop_layout_cubit.dart';
 import 'package:shop_app/layout/shop_layout/Shop_Layout_cubit/shop_layout_states.dart';
 import 'package:shop_app/models/categories_model.dart';
 import 'package:shop_app/modules/product_cateogries/product_cateogries.dart';
-import 'package:shop_app/shared/components/components.dart';
 import 'package:shop_app/shared/components/constant.dart';
 
 class CateogriesPage extends StatelessWidget {
@@ -15,26 +13,27 @@ class CateogriesPage extends StatelessWidget {
     return BlocConsumer<ShopLayoutCubit, ShopeLayoutStates>(
       listener: (context, state) {},
       builder: (context, state) {
-        return ConditionalBuilder(
-          condition: ShopLayoutCubit.get(context).categories!=null,
-           builder:  (context) =>Scaffold(
-               body: ListView.separated(
-                   physics: BouncingScrollPhysics(),
-                   itemBuilder: (context, index) => bulid_faviters(
-                       ShopLayoutCubit.get(context).categories!.data!.data[index],
-                       context),
-                   separatorBuilder: (context, index) => Container(
-                     height: 1,
-                     width: double.infinity,
-                     color: Colors.grey[300],
-                   ),
-                   itemCount: ShopLayoutCubit.get(context)
-                       .categories!
-                       .data!
-                       .data
-                       .length)),
-           fallback: (context) => Center(child: CircularProgressIndicator()),
-        );
+        if(ShopLayoutCubit.get(context).categories!=null){
+          return Scaffold(
+              body: ListView.separated(
+                  physics: BouncingScrollPhysics(),
+                  itemBuilder: (context, index) => bulid_faviters(
+                      ShopLayoutCubit.get(context).categories!.data!.data[index],
+                      context),
+                  separatorBuilder: (context, index) => Container(
+                    height: 1,
+                    width: double.infinity,
+                    color: Colors.grey[300],
+                  ),
+                  itemCount: ShopLayoutCubit.get(context)
+                      .categories!
+                      .data!
+                      .data
+                      .length));
+        }else{
+        return  Center(child: CircularProgressIndicator());
+        }
+
       },
     );
   }

@@ -43,7 +43,7 @@ final response= await http.post(Uri.parse(api),body: jsonEncode({
 }),headers: {
 
   'Content-Type':'application/json',
-  'Authorization':takon,
+  'Authorization':takon!,
   'lang':'ar'
 
 });
@@ -161,11 +161,14 @@ Future<void> get_favorite()  async{
   ShopLoginModels ?userModel;
 
 void get_data_proflie(){
+  print(takon);
   DioHelper.get_data(method: 'profile',toaken: takon).then((value) {
     userModel=ShopLoginModels.fromjson(value!.data);
+    print("userModel");
     emit(GetUserDataSuccessed(userModel));
   }).catchError((error){
-   print(error.toString());
+   print(error);
+   print("error");
     emit(GetUserDataFailed());
   });
 

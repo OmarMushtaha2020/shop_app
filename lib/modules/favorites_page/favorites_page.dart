@@ -1,5 +1,4 @@
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:conditional_builder/conditional_builder.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shop_app/layout/shop_layout/Shop_Layout_cubit/shop_layout_cubit.dart';
@@ -13,9 +12,8 @@ class FavoritesPage extends StatelessWidget {
     return BlocConsumer<ShopLayoutCubit, ShopeLayoutStates>(
       listener: (context, state) {},
       builder: (context, state) {
-        return ConditionalBuilder(
-          condition: ShopLayoutCubit.get(context).getFavirote!=null,
-          builder:  (context) =>  Scaffold(
+        if(ShopLayoutCubit.get(context).getFavirote!=null){
+          return  Scaffold(
               body: Column(
                 children: [
                   Expanded(
@@ -35,18 +33,18 @@ class FavoritesPage extends StatelessWidget {
                         itemCount: ShopLayoutCubit.get(context)
                             .getFavirote?.data?.data?.length??0),
                   ),
-            if(ShopLayoutCubit.get(context).getFavirote!.data!.data!.length==0)
-              Padding(
-                padding: const EdgeInsets.only(bottom: 300),
-                child: Center(child: Text('You don\'t have item')),
-              ),
+                  if(ShopLayoutCubit.get(context).getFavirote!.data!.data!.length==0)
+                    Padding(
+                      padding: const EdgeInsets.only(bottom: 300),
+                      child: Center(child: Text('You don\'t have item')),
+                    ),
                 ],
               )
 
-          ),
-fallback:(context) =>  Center(child: CircularProgressIndicator()),
-        );
-
+          );
+        }else{
+        return  Center(child: CircularProgressIndicator());
+        }
 
       },
     );

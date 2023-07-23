@@ -22,7 +22,7 @@ void main() async {
   DioHelper.inti();
   await CacthHelper.inti();
   HttpOverrides.global = new MyHttpOverrides();
-  bool onBoard = CacthHelper.get_Data(key: 'onBoard');
+  var onBoard = CacthHelper.get_Data(key: 'onBoard');
   takon = CacthHelper.get_Data(key: 'takon');
   print(takon);
   Widget? startwidget;
@@ -83,7 +83,6 @@ class MyApp extends StatelessWidget {
                   color: Colors.black,
                 )),
                 appBarTheme: AppBarTheme(
-                    backwardsCompatibility: false,
                     titleSpacing: 20,
                     systemOverlayStyle: SystemUiOverlayStyle(
                         statusBarIconBrightness: Brightness.dark,
@@ -113,7 +112,6 @@ class MyApp extends StatelessWidget {
                         fontWeight: FontWeight.w600,
                         color: Colors.white)),
                 appBarTheme: AppBarTheme(
-                    backwardsCompatibility: false,
                     titleSpacing: 20,
                     systemOverlayStyle: SystemUiOverlayStyle(
                       statusBarIconBrightness: Brightness.light,
