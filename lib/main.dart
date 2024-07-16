@@ -22,7 +22,7 @@ void main() async {
   DioHelper.inti();
   await CacthHelper.inti();
   HttpOverrides.global = new MyHttpOverrides();
-  var onBoard = CacthHelper.get_Data(key: 'onBoard');
+  bool? onBoard = CacthHelper.get_Data(key: 'onBoard');
   takon = CacthHelper.get_Data(key: 'takon');
   print(takon);
   Widget? startwidget;
@@ -35,7 +35,7 @@ void main() async {
   } else {
     startwidget = OnBoarding();
   }
-  runApp(MyApp(startwidget, onBoard));
+  runApp(MyApp(startwidget, onBoard??true));
 }
 
 class MyHttpOverrides extends HttpOverrides {

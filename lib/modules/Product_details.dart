@@ -111,60 +111,6 @@ Spacer(),
                             ),
                           ),
                         ),
-           Padding(
-             padding: const EdgeInsets.only(left: 20),
-             child: Row(
-               children: [
-                 FloatingActionButton(mini: true,onPressed:  () {
-setState(() {
-  count--;
-});
-                 },child: Padding(
-                   padding: const EdgeInsets.only(bottom: 15),
-                   child: Icon(Icons.minimize_rounded),
-                 ),),
-Text("$count",style: TextStyle(
-  fontWeight: FontWeight.bold,
-  fontSize: 25
-),),
-                 FloatingActionButton(mini: true,onPressed:  () {
-setState(() {
-  count++;
-});
-                 },child: Icon(Icons.add),),
-              SizedBox(width: 20,),
-
-                 GestureDetector(
-                   onTap: () {
-                     setState(() {
-                       ShopLayoutCubit.get(context).addToCart();
-                     });
-
-                   },
-                   child: Container(
-                     child: Center(
-                       child: Text("Add to cart",style: TextStyle(
-                         color: Colors.white,
-                         fontWeight: FontWeight.w600,
-
-                       )),
-                     ),
-                     width: 120,
-                     height: 40,
-                     decoration: BoxDecoration(
-                       color: Colors.blue,
-
-                       borderRadius: BorderRadius.only(
-                         bottomRight: Radius.circular(10)
-                             ,
-                         topLeft: Radius.circular(10)
-                       ),
-                     ),
-                   ),
-                 ),
-               ],
-             ),
-           )
                       ],
                     ),
                   ),
